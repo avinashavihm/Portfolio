@@ -58,9 +58,9 @@ function answer(question){
 }
 
 function setStatus(s){
-  var n = $('#status');
-  n.dataset.state = s;
-  n.textContent = s === 'speaking' ? 'speaking' : s === 'listening' ? 'listening' : 'ready';
+  $('#status').textContent = s === 'speaking' ? 'speaking' : s === 'listening' ? 'listening' : 'ready';
+  var dot = $('#dot');
+  if (dot) dot.className = s === 'speaking' ? 'on' : s === 'listening' ? 'hot' : '';
 }
 
 /* suggestions */

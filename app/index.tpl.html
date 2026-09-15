@@ -1,9 +1,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Talk to Avinash</title>
+<title>Avinash HM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 :root{
   --paper:#FBFBF9; --card:#FFFFFF; --sunk:#F2F2EE;
@@ -24,117 +24,298 @@
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-html,body{height:100%;margin:0}
-body{background:var(--paper);color:var(--body);font-family:var(--serif);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-.mono{font-family:var(--mono)}
+html,body{margin:0}
+body{background:var(--paper);color:var(--body);font-family:var(--serif);font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+h1,h2,h3{margin:0;color:var(--ink);font-weight:500;letter-spacing:-.015em;text-wrap:balance}
+a{color:var(--accent)}
+.wrap{max-width:1080px;margin:0 auto;padding-left:20px;padding-right:20px}
 
-.shell{max-width:1120px;margin:0 auto;padding:22px 20px 28px;display:grid;
-  grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:26px;align-items:start}
-@media (max-width:860px){.shell{grid-template-columns:1fr;gap:18px;padding-top:14px}}
+/* ---------- top bar ---------- */
+.top{border-bottom:1px solid var(--line);background:var(--card);position:sticky;top:env(safe-area-inset-top,0px);z-index:30}
+.top .in{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:11px 0}
+.top .nm{font-family:var(--mono);font-size:13.5px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.top nav{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
+.top nav a{font-family:var(--mono);font-size:11.5px;color:var(--muted);text-decoration:none;padding:5px 9px}
+.top nav a:hover{color:var(--ink);background:var(--sunk)}
+.btn{font-family:var(--mono);font-size:12px;padding:7px 12px;border:1px solid var(--line2);background:var(--card);
+  color:var(--ink);text-decoration:none;cursor:pointer;display:inline-block;white-space:nowrap}
+.btn:hover{border-color:var(--ink)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
 
-/* ---- face ---- */
+/* ---------- hero ---------- */
+.hero{padding-block:18px 26px}
+.hero .lede{font-size:clamp(20px,2.5vw,27px);line-height:1.25;color:var(--ink);max-width:30ch;font-weight:400}
+.hero .sub{margin-top:9px;font-size:15.5px;color:var(--muted);max-width:66ch;line-height:1.5}
+.stack{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:22px;align-items:start;margin-top:18px}
+@media (max-width:880px){.stack{grid-template-columns:1fr;gap:18px}}
+
 .panel{border:1px solid var(--line2);background:var(--card);overflow:hidden}
 #stage{position:relative;aspect-ratio:896/908;background:#fff;width:100%}
 #stage canvas{display:block;width:100%;height:100%}
 .badge{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:7px;
-  background:rgba(255,255,255,.88);border:1px solid var(--line2);padding:5px 9px;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--ink);backdrop-filter:blur(6px)}
+  background:rgba(255,255,255,.9);border:1px solid var(--line2);padding:5px 9px;
+  font-family:var(--mono);font-size:10.5px;color:var(--ink);backdrop-filter:blur(6px)}
 .badge i{width:7px;height:7px;border-radius:50%;background:var(--faint);display:block}
 .badge i.on{background:var(--live);box-shadow:0 0 7px var(--live)}
 .badge i.hot{background:var(--hot);box-shadow:0 0 7px var(--hot)}
 #nowebgl{position:absolute;inset:0;display:grid;place-items:center;padding:20px;text-align:center;
   font-family:var(--mono);font-size:12px;color:var(--muted);background:var(--sunk)}
-.idblock{padding:12px 14px;border-top:1px solid var(--line)}
-.idblock h1{margin:0;font-size:19px;font-weight:500;color:var(--ink);letter-spacing:-.015em}
-.idblock p{margin:2px 0 0;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
-.disclose{margin:9px 0 0;font-size:12.5px;color:var(--faint);line-height:1.45}
+.idblock{padding:11px 13px;border-top:1px solid var(--line)}
+.idblock h1{font-size:18px}
+.idblock p{margin:2px 0 0;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.disclose{margin:8px 0 0!important;font-family:var(--serif)!important;font-size:12.5px!important;color:var(--faint)!important;line-height:1.45}
 
-/* ---- conversation ---- */
-.convo{display:flex;flex-direction:column;gap:12px;min-width:0}
-.transcript{border:1px solid var(--line);background:var(--card);padding:14px;min-height:260px;
-  max-height:46vh;overflow-y:auto;display:flex;flex-direction:column;gap:13px}
-@media (max-width:860px){.transcript{max-height:none;min-height:180px}}
-.turn{max-width:62ch}
+.convo{display:flex;flex-direction:column;gap:11px;min-width:0}
+.transcript{border:1px solid var(--line);background:var(--card);padding:14px;min-height:210px;
+  max-height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:13px}
+.turn{max-width:60ch}
 .turn .say{font-size:16.5px;line-height:1.6}
 .turn.them{align-self:flex-end;text-align:right}
-.turn.them .say{font-family:var(--mono);font-size:13px;color:var(--muted);
-  background:var(--sunk);padding:8px 11px;display:inline-block;text-align:left}
+.turn.them .say{font-family:var(--mono);font-size:13px;color:var(--muted);background:var(--sunk);
+  padding:8px 11px;display:inline-block;text-align:left}
 .turn.him .say{color:var(--body)}
 .turn .src{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
   color:var(--faint);margin-top:6px;padding-left:10px;border-left:2px solid var(--line2)}
-.empty{color:var(--faint);font-size:15px}
-
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font-family:var(--mono);font-size:11.5px;padding:6px 10px;border:1px solid var(--line2);
-  background:var(--card);color:var(--muted);cursor:pointer;transition:.13s;text-align:left}
+  background:var(--card);color:var(--muted);cursor:pointer;text-align:left}
 .chip:hover{border-color:var(--ink);color:var(--ink)}
-.chip:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-
-.bar{display:flex;gap:7px;align-items:stretch}
-.bar input{flex:1;min-width:0;font-family:var(--mono);font-size:13.5px;padding:10px 12px;
+.chip:focus-visible,button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.bar{display:flex;gap:6px}
+.bar input{flex:1;min-width:0;font-family:var(--mono);font-size:13px;padding:10px 12px;
   border:1px solid var(--line2);background:var(--card);color:var(--ink);border-radius:0}
-.bar button{font-family:var(--mono);font-size:12.5px;padding:10px 13px;border:1px solid var(--line2);
+.bar button{font-family:var(--mono);font-size:12px;padding:10px 12px;border:1px solid var(--line2);
   background:var(--card);color:var(--ink);cursor:pointer;white-space:nowrap}
 .bar button:hover:not(:disabled){border-color:var(--ink)}
 .bar button:disabled{opacity:.42;cursor:not-allowed}
 .bar button.pri{background:var(--accent);border-color:var(--accent);color:#fff}
 #mic[aria-pressed=true]{background:var(--hot);border-color:var(--hot);color:#fff}
-.meta{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;color:var(--faint)}
-.meta a{color:var(--accent);text-decoration:none}
 
-/* ---- calibration ---- */
-#calib{position:fixed;right:14px;bottom:14px;width:290px;max-height:76vh;overflow:auto;z-index:50;
+/* ---------- sections ---------- */
+section{padding-block:34px;border-top:1px solid var(--line)}
+.h2{display:flex;align-items:baseline;gap:11px;margin-bottom:20px}
+.h2 h2{font-family:var(--mono);font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.h2 .rule{flex:1;height:1px;background:var(--line)}
+.h2 .n{font-family:var(--mono);font-size:11px;color:var(--faint)}
+
+.role{display:grid;grid-template-columns:minmax(0,152px) minmax(0,1fr);gap:20px;padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--line)}
+.role:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+@media (max-width:700px){.role{grid-template-columns:1fr;gap:6px}}
+.role .when{font-family:var(--mono);font-size:11px;color:var(--faint);padding-top:4px}
+.role h3{font-size:18px}
+.role .org{color:var(--accent);font-size:15px;margin-top:1px}
+.role ul{margin:11px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+.role li{position:relative;padding-left:16px;font-size:15.5px;line-height:1.55;color:var(--body)}
+.role li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:1px;background:var(--line2)}
+.role li b{color:var(--ink);font-weight:600}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.card{background:var(--card);padding:17px}
+.card .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent)}
+.card h3{font-size:17px;margin:7px 0 5px}
+.card p{margin:0;font-size:15px;color:var(--muted);line-height:1.55}
+.kpi{display:flex;gap:16px;flex-wrap:wrap;margin-top:13px;padding-top:11px;border-top:1px solid var(--line)}
+.kpi div{font-family:var(--mono)}
+.kpi .n{font-size:17px;font-weight:600;color:var(--ink)}
+.kpi .l{font-size:9.5px;color:var(--faint);letter-spacing:.07em;text-transform:uppercase;margin-top:1px}
+
+.skills dl{margin:0;display:grid;grid-template-columns:minmax(0,172px) minmax(0,1fr)}
+@media (max-width:640px){.skills dl{grid-template-columns:1fr}}
+.skills dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);padding:12px 0;border-top:1px solid var(--line)}
+.skills dd{margin:0;padding:12px 0;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+@media (max-width:640px){.skills dd{border-top:0;padding-top:0}}
+.skills dd b{color:var(--ink);font-weight:500}
+
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:28px;align-items:start}
+@media (max-width:760px){.split{grid-template-columns:1fr}}
+figure{margin:0;border:1px solid var(--line)}
+figure img{width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:10.5px;color:var(--faint);padding:8px 10px;border-top:1px solid var(--line);background:var(--card)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.grid2 .c{background:var(--card);padding:15px}
+.grid2 .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+.grid2 .t{font-size:16px;color:var(--ink)}
+.grid2 .s{font-size:14px;color:var(--muted);margin-top:2px}
+.grid2 .x{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:4px}
+
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.contact-grid a{background:var(--card);padding:15px;text-decoration:none;display:block}
+.contact-grid a:hover{background:var(--accent-soft)}
+.contact-grid .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)}
+.contact-grid .v{font-family:var(--mono);font-size:13.5px;color:var(--ink);margin-top:4px;word-break:break-all}
+footer{border-top:1px solid var(--line);padding:18px 0 34px;font-family:var(--mono);font-size:11px;color:var(--faint);
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+#calib{position:fixed;right:14px;bottom:14px;width:288px;max-height:76vh;overflow:auto;z-index:60;
   background:var(--card);border:1px solid var(--line2);padding:12px;font-family:var(--mono);font-size:11px}
-#calib h3{margin:0 0 9px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:500}
-#calibBody label{display:grid;grid-template-columns:78px 1fr 46px;gap:7px;align-items:center;margin-bottom:5px}
+#calib h3{margin:0 0 9px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+#calibBody label{display:grid;grid-template-columns:76px 1fr 44px;gap:7px;align-items:center;margin-bottom:5px}
 #calibBody input{width:100%}
 #calibOut{margin-top:9px;padding:8px;background:var(--sunk);font-size:10px;word-break:break-all;line-height:1.5}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media print{.top,.hero .stack,#calib{display:none}}
 </style>
 
-<div class="shell">
-  <div>
+<header class="top"><div class="wrap in">
+  <span class="nm">Avinash HM</span>
+  <nav>
+    <a href="#talk">Talk</a><a href="#experience">Experience</a><a href="#work">Work</a>
+    <a href="#skills">Skills</a><a href="#background">Background</a><a href="#contact">Contact</a>
+  </nav>
+  <a class="btn pri" href="mailto:avi.hm24@gmail.com">Email</a>
+</div></header>
+
+<div class="wrap hero" id="talk">
+  <p class="lede">I make large language models cheap enough to actually ship.</p>
+  <p class="sub">AI Engineer in Bangalore — production LLM systems, agentic workflows and RAG,
+    with the quantization work to run them on affordable hardware. Published in IEEE.
+    <b style="color:var(--ink);font-weight:500">Don't read all this — just ask me.</b></p>
+
+  <div class="stack">
     <div class="panel">
       <div id="stage">
         <div class="badge"><i id="dot"></i><span id="status">ready</span></div>
-        <div id="nowebgl" hidden>This browser can't run the avatar.<br>The conversation still works below.</div>
+        <div id="nowebgl" hidden>This browser can't run the avatar.<br>The conversation still works.</div>
       </div>
       <div class="idblock">
         <h1 id="who">Avinash HM</h1>
         <p id="role">AI Engineer · Bangalore, India</p>
-        <p class="disclose">This is an AI avatar of Avinash, answering only from his résumé. It will say
-          so when it doesn't know something. For anything it can't answer, email
-          <a href="mailto:avi.hm24@gmail.com" style="color:var(--accent)">avi.hm24@gmail.com</a>.</p>
+        <p class="disclose">An AI avatar answering only from his résumé. It says so when it doesn't
+          know, and won't guess at anything that isn't on the record.</p>
       </div>
     </div>
-  </div>
 
-  <div class="convo">
-    <div class="transcript" id="transcript" aria-live="polite">
-      <div class="turn him"><div class="say">Hello — I'm an AI version of Avinash HM. Ask me about
-        my work, my research, or my background, and I'll answer from my record. Press the mic, or just type.</div></div>
-    </div>
-    <div class="chips" id="suggest"></div>
-    <form class="bar" id="form">
-      <input id="q" type="text" placeholder="Ask about his experience…" autocomplete="off" aria-label="Ask a question">
-      <button type="submit" class="pri">Ask</button>
-      <button type="button" id="mic" aria-pressed="false" title="Speak">Mic</button>
-      <button type="button" id="stop" title="Stop speaking">Stop</button>
-    </form>
-    <div class="meta">
-      <span>Answers are retrieved from the résumé — nothing is generated.</span>
-      <a href="mailto:avi.hm24@gmail.com">avi.hm24@gmail.com</a>
-      <a href="https://linkedin.com/in/avinash-hm007" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/Avinashhmavi" target="_blank" rel="noopener">GitHub</a>
+    <div class="convo">
+      <div class="transcript" id="transcript" aria-live="polite">
+        <div class="turn him"><div class="say">Hello — I'm an AI version of Avinash HM. Ask me about my
+          work, my research or my background and I'll answer from my record. Press the mic, or type.</div></div>
+      </div>
+      <div class="chips" id="suggest"></div>
+      <form class="bar" id="form">
+        <input id="q" type="text" placeholder="Ask about his experience…" autocomplete="off" aria-label="Ask a question">
+        <button type="submit" class="pri">Ask</button>
+        <button type="button" id="mic" aria-pressed="false" title="Speak">Mic</button>
+        <button type="button" id="stop" title="Stop">Stop</button>
+      </form>
     </div>
   </div>
 </div>
 
-<div id="calib" hidden>
-  <h3>Anchor calibration</h3>
-  <div id="calibBody"></div>
-  <div id="calibOut"></div>
+<div class="wrap">
+
+<section id="experience">
+  <div class="h2"><h2>Experience</h2><span class="rule"></span><span class="n">1+ yr production</span></div>
+  <div class="role">
+    <div class="when">Jul 2025 —<br>Present</div>
+    <div>
+      <h3>AI Engineer</h3><div class="org">AiGenthix Technologies Pvt. Ltd. · Bangalore</div>
+      <ul>
+        <li>Architected and deployed <b>5+ production LLM systems</b> — chatbots, an AI interviewer, an AI receptionist and workflow automation — serving enterprise clients end to end.</li>
+        <li>Designed <b>RAG architectures</b> with LangChain, embeddings and vector databases, lifting retrieval relevance <b>~30%</b> over a keyword baseline.</li>
+        <li>Built <b>multi-agent workflows</b> on A2A interaction patterns and <b>MCP</b> for structured tool use, cutting manual effort <b>~40%</b>.</li>
+        <li>Developed AI plugins with <b>Claude Code and the Anthropic API</b>, letting agents invoke external services autonomously.</li>
+        <li>Established <b>LLM evaluation and benchmarking</b> for retrieval quality, accuracy and latency across model versions.</li>
+        <li>Shipped REST endpoints; containerised with <b>Docker and Kubernetes</b> on CI/CD for high-concurrency load.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="role">
+    <div class="when">Mar 2025 —<br>Jun 2025</div>
+    <div>
+      <h3>ML Engineering Intern</h3><div class="org">Reliance Jio Infocom Limited · Bangalore</div>
+      <ul>
+        <li>Built an <b>NLP email automation pipeline</b> with intent detection and classifiers — turnaround down <b>~50%</b>.</li>
+        <li>Fine-tuned TensorFlow and PyTorch <b>transformer LLMs</b> for edge — latency down <b>~35%</b>, cloud dependency down <b>~40%</b>.</li>
+        <li>Applied <b>GPTQ/AWQ quantization</b> for <b>~45% memory reduction</b> at <b>&gt;95% of baseline accuracy</b>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="h2"><h2>Selected work</h2><span class="rule"></span><span class="n">3 projects</span></div>
+  <div class="cards">
+    <div class="card">
+      <div class="tag">IEEE ICIICS-2026 · Published</div>
+      <h3>Post-training quantization for LLMs</h3>
+      <p>Benchmarked post-training quantization across Qwen-3, LLaMA-3.2 and GPT-2. Artefacts open-sourced on Hugging Face and picked up by practitioners.</p>
+      <div class="kpi"><div><div class="n">−40%</div><div class="l">memory</div></div><div><div class="n">−30%</div><div class="l">latency</div></div><div><div class="n">&lt;2%</div><div class="l">acc. drop</div></div></div>
+    </div>
+    <div class="card">
+      <div class="tag">2nd place, national</div>
+      <h3>Sahayak AI</h3>
+      <p>Multi-agent education platform automating lesson planning, quiz generation and delivery, with LLM personalisation. Team lead. Awarded at Agentic AI Day 2025 by Google Cloud &amp; Hack2Skill.</p>
+      <div class="kpi"><div><div class="n">−60%</div><div class="l">teacher prep</div></div><div><div class="n">2nd</div><div class="l">of nation</div></div></div>
+    </div>
+    <div class="card">
+      <div class="tag">Production · AiGenthix</div>
+      <h3>Multi-agent workflow platform</h3>
+      <p>A2A interaction patterns and MCP for structured tool use across five-plus deployed LLM systems, with evaluation gates before each release.</p>
+      <div class="kpi"><div><div class="n">−40%</div><div class="l">manual effort</div></div><div><div class="n">+30%</div><div class="l">retrieval rel.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="skills">
+  <div class="h2"><h2>Stack</h2><span class="rule"></span></div>
+  <dl>
+    <dt>Generative AI &amp; LLM</dt><dd><b>Fine-tuning</b>, RAG, quantization (GPTQ / AWQ / GGUF), inference optimization, evaluation &amp; benchmarking, context engineering, embeddings, semantic search</dd>
+    <dt>Agentic AI &amp; MCP</dt><dd><b>MCP</b>, A2A interaction patterns, tool use, function calling, multi-agent orchestration and pipelines</dd>
+    <dt>Languages &amp; ML</dt><dd><b>Python</b>, SQL, machine learning, deep learning, NLP, transformers, TensorFlow, PyTorch, prompt engineering</dd>
+    <dt>Frameworks &amp; tools</dt><dd><b>LangChain</b>, Hugging Face, OpenAI API, Anthropic Claude API, Claude Code, AWS Bedrock, Genkit, ADK, FastAPI</dd>
+    <dt>Cloud &amp; LLMOps</dt><dd><b>GCP</b>, AWS, Docker, Kubernetes, CI/CD, model deployment &amp; monitoring, edge AI, FAISS / Chroma</dd>
+    <dt>Data &amp; analytics</dt><dd>MySQL, MongoDB, Power BI, Tableau, feature engineering, data pipelines</dd>
+  </dl>
+</section>
+
+<section id="background">
+  <div class="h2"><h2>Background</h2><span class="rule"></span></div>
+  <div class="split">
+    <div>
+      <div class="grid2">
+        <div class="c"><div class="k">Postgraduate</div><div class="t">MBA — Data Analytics &amp; Marketing</div>
+          <div class="s">IFIM College, Bangalore · 2023–2025</div><div class="x">Analytics, strategy, data-driven decision-making</div></div>
+        <div class="c"><div class="k">Undergraduate</div><div class="t">B.E. — Electronics &amp; Communication</div>
+          <div class="s">Sapthagiri College of Engineering, Bangalore · 2019–2023</div><div class="x">Where the interest in constrained hardware began</div></div>
+        <div class="c"><div class="k">Certification</div><div class="t">Claude Certified Architect — Foundations</div>
+          <div class="s">Anthropic · Jun 2026 – Dec 2026</div><div class="x">cert azqtzxw2k57d</div></div>
+        <div class="c"><div class="k">Also certified</div><div class="t">Generative AI Mastery</div>
+          <div class="s">OpenAI Academy · Data Analytics, IIT Roorkee · Six Sigma White Belt</div></div>
+      </div>
+      <div class="grid2" style="margin-top:22px">
+        <div class="c"><div class="k">Off duty</div><div class="t">Car racing · PC games</div></div>
+        <div class="c"><div class="k">Based in</div><div class="t">Bangalore, India</div>
+          <div class="s">Open to AI / LLM engineering roles</div></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <figure><img src="assets/photo-graduation.jpg" alt="Avinash HM at the IFIM College graduation ceremony" loading="lazy">
+        <figcaption>IFIM College graduation</figcaption></figure>
+      <figure><img src="assets/photo-temple.jpg" alt="Avinash HM at a Hoysala temple" loading="lazy">
+        <figcaption>Off duty</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="h2"><h2>Contact</h2><span class="rule"></span><span class="n">Bangalore, India</span></div>
+  <p style="margin:0 0 14px;color:var(--muted);max-width:56ch">Open to AI and LLM engineering roles. Fastest by email — or ask the avatar above.</p>
+  <div class="contact-grid">
+    <a href="mailto:avi.hm24@gmail.com"><div class="k">Email · fastest</div><div class="v">avi.hm24@gmail.com</div></a>
+    <a href="tel:+918951228018"><div class="k">Phone</div><div class="v">+91 8951228018</div></a>
+    <a href="https://linkedin.com/in/avinash-hm007" target="_blank" rel="noopener"><div class="k">LinkedIn</div><div class="v">avinash-hm007</div></a>
+    <a href="https://github.com/Avinashhmavi" target="_blank" rel="noopener"><div class="k">GitHub</div><div class="v">Avinashhmavi</div></a>
+  </div>
+</section>
+
+<footer>
+  <span>Avinash HM — AI Engineer, Bangalore</span>
+  <span>Avatar answers are retrieved from the résumé. Nothing is generated.</span>
+</footer>
 </div>
+
+<div id="calib" hidden><h3>Anchor calibration</h3><div id="calibBody"></div><div id="calibOut"></div></div>
 
 <script>
   window.PORTRAIT_URL = 'assets/portrait.jpg';

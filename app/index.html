@@ -1,9 +1,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Talk to Avinash</title>
+<title>Avinash HM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 :root{
   --paper:#FBFBF9; --card:#FFFFFF; --sunk:#F2F2EE;
@@ -24,117 +24,298 @@
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-html,body{height:100%;margin:0}
-body{background:var(--paper);color:var(--body);font-family:var(--serif);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-.mono{font-family:var(--mono)}
+html,body{margin:0}
+body{background:var(--paper);color:var(--body);font-family:var(--serif);font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+h1,h2,h3{margin:0;color:var(--ink);font-weight:500;letter-spacing:-.015em;text-wrap:balance}
+a{color:var(--accent)}
+.wrap{max-width:1080px;margin:0 auto;padding-left:20px;padding-right:20px}
 
-.shell{max-width:1120px;margin:0 auto;padding:22px 20px 28px;display:grid;
-  grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:26px;align-items:start}
-@media (max-width:860px){.shell{grid-template-columns:1fr;gap:18px;padding-top:14px}}
+/* ---------- top bar ---------- */
+.top{border-bottom:1px solid var(--line);background:var(--card);position:sticky;top:env(safe-area-inset-top,0px);z-index:30}
+.top .in{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:11px 0}
+.top .nm{font-family:var(--mono);font-size:13.5px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.top nav{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
+.top nav a{font-family:var(--mono);font-size:11.5px;color:var(--muted);text-decoration:none;padding:5px 9px}
+.top nav a:hover{color:var(--ink);background:var(--sunk)}
+.btn{font-family:var(--mono);font-size:12px;padding:7px 12px;border:1px solid var(--line2);background:var(--card);
+  color:var(--ink);text-decoration:none;cursor:pointer;display:inline-block;white-space:nowrap}
+.btn:hover{border-color:var(--ink)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
 
-/* ---- face ---- */
+/* ---------- hero ---------- */
+.hero{padding-block:18px 26px}
+.hero .lede{font-size:clamp(20px,2.5vw,27px);line-height:1.25;color:var(--ink);max-width:30ch;font-weight:400}
+.hero .sub{margin-top:9px;font-size:15.5px;color:var(--muted);max-width:66ch;line-height:1.5}
+.stack{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:22px;align-items:start;margin-top:18px}
+@media (max-width:880px){.stack{grid-template-columns:1fr;gap:18px}}
+
 .panel{border:1px solid var(--line2);background:var(--card);overflow:hidden}
 #stage{position:relative;aspect-ratio:896/908;background:#fff;width:100%}
 #stage canvas{display:block;width:100%;height:100%}
 .badge{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:7px;
-  background:rgba(255,255,255,.88);border:1px solid var(--line2);padding:5px 9px;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--ink);backdrop-filter:blur(6px)}
+  background:rgba(255,255,255,.9);border:1px solid var(--line2);padding:5px 9px;
+  font-family:var(--mono);font-size:10.5px;color:var(--ink);backdrop-filter:blur(6px)}
 .badge i{width:7px;height:7px;border-radius:50%;background:var(--faint);display:block}
 .badge i.on{background:var(--live);box-shadow:0 0 7px var(--live)}
 .badge i.hot{background:var(--hot);box-shadow:0 0 7px var(--hot)}
 #nowebgl{position:absolute;inset:0;display:grid;place-items:center;padding:20px;text-align:center;
   font-family:var(--mono);font-size:12px;color:var(--muted);background:var(--sunk)}
-.idblock{padding:12px 14px;border-top:1px solid var(--line)}
-.idblock h1{margin:0;font-size:19px;font-weight:500;color:var(--ink);letter-spacing:-.015em}
-.idblock p{margin:2px 0 0;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
-.disclose{margin:9px 0 0;font-size:12.5px;color:var(--faint);line-height:1.45}
+.idblock{padding:11px 13px;border-top:1px solid var(--line)}
+.idblock h1{font-size:18px}
+.idblock p{margin:2px 0 0;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.disclose{margin:8px 0 0!important;font-family:var(--serif)!important;font-size:12.5px!important;color:var(--faint)!important;line-height:1.45}
 
-/* ---- conversation ---- */
-.convo{display:flex;flex-direction:column;gap:12px;min-width:0}
-.transcript{border:1px solid var(--line);background:var(--card);padding:14px;min-height:260px;
-  max-height:46vh;overflow-y:auto;display:flex;flex-direction:column;gap:13px}
-@media (max-width:860px){.transcript{max-height:none;min-height:180px}}
-.turn{max-width:62ch}
+.convo{display:flex;flex-direction:column;gap:11px;min-width:0}
+.transcript{border:1px solid var(--line);background:var(--card);padding:14px;min-height:210px;
+  max-height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:13px}
+.turn{max-width:60ch}
 .turn .say{font-size:16.5px;line-height:1.6}
 .turn.them{align-self:flex-end;text-align:right}
-.turn.them .say{font-family:var(--mono);font-size:13px;color:var(--muted);
-  background:var(--sunk);padding:8px 11px;display:inline-block;text-align:left}
+.turn.them .say{font-family:var(--mono);font-size:13px;color:var(--muted);background:var(--sunk);
+  padding:8px 11px;display:inline-block;text-align:left}
 .turn.him .say{color:var(--body)}
 .turn .src{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
   color:var(--faint);margin-top:6px;padding-left:10px;border-left:2px solid var(--line2)}
-.empty{color:var(--faint);font-size:15px}
-
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font-family:var(--mono);font-size:11.5px;padding:6px 10px;border:1px solid var(--line2);
-  background:var(--card);color:var(--muted);cursor:pointer;transition:.13s;text-align:left}
+  background:var(--card);color:var(--muted);cursor:pointer;text-align:left}
 .chip:hover{border-color:var(--ink);color:var(--ink)}
-.chip:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-
-.bar{display:flex;gap:7px;align-items:stretch}
-.bar input{flex:1;min-width:0;font-family:var(--mono);font-size:13.5px;padding:10px 12px;
+.chip:focus-visible,button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.bar{display:flex;gap:6px}
+.bar input{flex:1;min-width:0;font-family:var(--mono);font-size:13px;padding:10px 12px;
   border:1px solid var(--line2);background:var(--card);color:var(--ink);border-radius:0}
-.bar button{font-family:var(--mono);font-size:12.5px;padding:10px 13px;border:1px solid var(--line2);
+.bar button{font-family:var(--mono);font-size:12px;padding:10px 12px;border:1px solid var(--line2);
   background:var(--card);color:var(--ink);cursor:pointer;white-space:nowrap}
 .bar button:hover:not(:disabled){border-color:var(--ink)}
 .bar button:disabled{opacity:.42;cursor:not-allowed}
 .bar button.pri{background:var(--accent);border-color:var(--accent);color:#fff}
 #mic[aria-pressed=true]{background:var(--hot);border-color:var(--hot);color:#fff}
-.meta{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;color:var(--faint)}
-.meta a{color:var(--accent);text-decoration:none}
 
-/* ---- calibration ---- */
-#calib{position:fixed;right:14px;bottom:14px;width:290px;max-height:76vh;overflow:auto;z-index:50;
+/* ---------- sections ---------- */
+section{padding-block:34px;border-top:1px solid var(--line)}
+.h2{display:flex;align-items:baseline;gap:11px;margin-bottom:20px}
+.h2 h2{font-family:var(--mono);font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.h2 .rule{flex:1;height:1px;background:var(--line)}
+.h2 .n{font-family:var(--mono);font-size:11px;color:var(--faint)}
+
+.role{display:grid;grid-template-columns:minmax(0,152px) minmax(0,1fr);gap:20px;padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--line)}
+.role:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+@media (max-width:700px){.role{grid-template-columns:1fr;gap:6px}}
+.role .when{font-family:var(--mono);font-size:11px;color:var(--faint);padding-top:4px}
+.role h3{font-size:18px}
+.role .org{color:var(--accent);font-size:15px;margin-top:1px}
+.role ul{margin:11px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+.role li{position:relative;padding-left:16px;font-size:15.5px;line-height:1.55;color:var(--body)}
+.role li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:1px;background:var(--line2)}
+.role li b{color:var(--ink);font-weight:600}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.card{background:var(--card);padding:17px}
+.card .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--accent)}
+.card h3{font-size:17px;margin:7px 0 5px}
+.card p{margin:0;font-size:15px;color:var(--muted);line-height:1.55}
+.kpi{display:flex;gap:16px;flex-wrap:wrap;margin-top:13px;padding-top:11px;border-top:1px solid var(--line)}
+.kpi div{font-family:var(--mono)}
+.kpi .n{font-size:17px;font-weight:600;color:var(--ink)}
+.kpi .l{font-size:9.5px;color:var(--faint);letter-spacing:.07em;text-transform:uppercase;margin-top:1px}
+
+.skills dl{margin:0;display:grid;grid-template-columns:minmax(0,172px) minmax(0,1fr)}
+@media (max-width:640px){.skills dl{grid-template-columns:1fr}}
+.skills dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--faint);padding:12px 0;border-top:1px solid var(--line)}
+.skills dd{margin:0;padding:12px 0;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+@media (max-width:640px){.skills dd{border-top:0;padding-top:0}}
+.skills dd b{color:var(--ink);font-weight:500}
+
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:28px;align-items:start}
+@media (max-width:760px){.split{grid-template-columns:1fr}}
+figure{margin:0;border:1px solid var(--line)}
+figure img{width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:10.5px;color:var(--faint);padding:8px 10px;border-top:1px solid var(--line);background:var(--card)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.grid2 .c{background:var(--card);padding:15px}
+.grid2 .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+.grid2 .t{font-size:16px;color:var(--ink)}
+.grid2 .s{font-size:14px;color:var(--muted);margin-top:2px}
+.grid2 .x{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:4px}
+
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.contact-grid a{background:var(--card);padding:15px;text-decoration:none;display:block}
+.contact-grid a:hover{background:var(--accent-soft)}
+.contact-grid .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)}
+.contact-grid .v{font-family:var(--mono);font-size:13.5px;color:var(--ink);margin-top:4px;word-break:break-all}
+footer{border-top:1px solid var(--line);padding:18px 0 34px;font-family:var(--mono);font-size:11px;color:var(--faint);
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+#calib{position:fixed;right:14px;bottom:14px;width:288px;max-height:76vh;overflow:auto;z-index:60;
   background:var(--card);border:1px solid var(--line2);padding:12px;font-family:var(--mono);font-size:11px}
-#calib h3{margin:0 0 9px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:500}
-#calibBody label{display:grid;grid-template-columns:78px 1fr 46px;gap:7px;align-items:center;margin-bottom:5px}
+#calib h3{margin:0 0 9px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+#calibBody label{display:grid;grid-template-columns:76px 1fr 44px;gap:7px;align-items:center;margin-bottom:5px}
 #calibBody input{width:100%}
 #calibOut{margin-top:9px;padding:8px;background:var(--sunk);font-size:10px;word-break:break-all;line-height:1.5}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media print{.top,.hero .stack,#calib{display:none}}
 </style>
 
-<div class="shell">
-  <div>
+<header class="top"><div class="wrap in">
+  <span class="nm">Avinash HM</span>
+  <nav>
+    <a href="#talk">Talk</a><a href="#experience">Experience</a><a href="#work">Work</a>
+    <a href="#skills">Skills</a><a href="#background">Background</a><a href="#contact">Contact</a>
+  </nav>
+  <a class="btn pri" href="mailto:avi.hm24@gmail.com">Email</a>
+</div></header>
+
+<div class="wrap hero" id="talk">
+  <p class="lede">I make large language models cheap enough to actually ship.</p>
+  <p class="sub">AI Engineer in Bangalore — production LLM systems, agentic workflows and RAG,
+    with the quantization work to run them on affordable hardware. Published in IEEE.
+    <b style="color:var(--ink);font-weight:500">Don't read all this — just ask me.</b></p>
+
+  <div class="stack">
     <div class="panel">
       <div id="stage">
         <div class="badge"><i id="dot"></i><span id="status">ready</span></div>
-        <div id="nowebgl" hidden>This browser can't run the avatar.<br>The conversation still works below.</div>
+        <div id="nowebgl" hidden>This browser can't run the avatar.<br>The conversation still works.</div>
       </div>
       <div class="idblock">
         <h1 id="who">Avinash HM</h1>
         <p id="role">AI Engineer · Bangalore, India</p>
-        <p class="disclose">This is an AI avatar of Avinash, answering only from his résumé. It will say
-          so when it doesn't know something. For anything it can't answer, email
-          <a href="mailto:avi.hm24@gmail.com" style="color:var(--accent)">avi.hm24@gmail.com</a>.</p>
+        <p class="disclose">An AI avatar answering only from his résumé. It says so when it doesn't
+          know, and won't guess at anything that isn't on the record.</p>
       </div>
     </div>
-  </div>
 
-  <div class="convo">
-    <div class="transcript" id="transcript" aria-live="polite">
-      <div class="turn him"><div class="say">Hello — I'm an AI version of Avinash HM. Ask me about
-        my work, my research, or my background, and I'll answer from my record. Press the mic, or just type.</div></div>
-    </div>
-    <div class="chips" id="suggest"></div>
-    <form class="bar" id="form">
-      <input id="q" type="text" placeholder="Ask about his experience…" autocomplete="off" aria-label="Ask a question">
-      <button type="submit" class="pri">Ask</button>
-      <button type="button" id="mic" aria-pressed="false" title="Speak">Mic</button>
-      <button type="button" id="stop" title="Stop speaking">Stop</button>
-    </form>
-    <div class="meta">
-      <span>Answers are retrieved from the résumé — nothing is generated.</span>
-      <a href="mailto:avi.hm24@gmail.com">avi.hm24@gmail.com</a>
-      <a href="https://linkedin.com/in/avinash-hm007" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/Avinashhmavi" target="_blank" rel="noopener">GitHub</a>
+    <div class="convo">
+      <div class="transcript" id="transcript" aria-live="polite">
+        <div class="turn him"><div class="say">Hello — I'm an AI version of Avinash HM. Ask me about my
+          work, my research or my background and I'll answer from my record. Press the mic, or type.</div></div>
+      </div>
+      <div class="chips" id="suggest"></div>
+      <form class="bar" id="form">
+        <input id="q" type="text" placeholder="Ask about his experience…" autocomplete="off" aria-label="Ask a question">
+        <button type="submit" class="pri">Ask</button>
+        <button type="button" id="mic" aria-pressed="false" title="Speak">Mic</button>
+        <button type="button" id="stop" title="Stop">Stop</button>
+      </form>
     </div>
   </div>
 </div>
 
-<div id="calib" hidden>
-  <h3>Anchor calibration</h3>
-  <div id="calibBody"></div>
-  <div id="calibOut"></div>
+<div class="wrap">
+
+<section id="experience">
+  <div class="h2"><h2>Experience</h2><span class="rule"></span><span class="n">1+ yr production</span></div>
+  <div class="role">
+    <div class="when">Jul 2025 —<br>Present</div>
+    <div>
+      <h3>AI Engineer</h3><div class="org">AiGenthix Technologies Pvt. Ltd. · Bangalore</div>
+      <ul>
+        <li>Architected and deployed <b>5+ production LLM systems</b> — chatbots, an AI interviewer, an AI receptionist and workflow automation — serving enterprise clients end to end.</li>
+        <li>Designed <b>RAG architectures</b> with LangChain, embeddings and vector databases, lifting retrieval relevance <b>~30%</b> over a keyword baseline.</li>
+        <li>Built <b>multi-agent workflows</b> on A2A interaction patterns and <b>MCP</b> for structured tool use, cutting manual effort <b>~40%</b>.</li>
+        <li>Developed AI plugins with <b>Claude Code and the Anthropic API</b>, letting agents invoke external services autonomously.</li>
+        <li>Established <b>LLM evaluation and benchmarking</b> for retrieval quality, accuracy and latency across model versions.</li>
+        <li>Shipped REST endpoints; containerised with <b>Docker and Kubernetes</b> on CI/CD for high-concurrency load.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="role">
+    <div class="when">Mar 2025 —<br>Jun 2025</div>
+    <div>
+      <h3>ML Engineering Intern</h3><div class="org">Reliance Jio Infocom Limited · Bangalore</div>
+      <ul>
+        <li>Built an <b>NLP email automation pipeline</b> with intent detection and classifiers — turnaround down <b>~50%</b>.</li>
+        <li>Fine-tuned TensorFlow and PyTorch <b>transformer LLMs</b> for edge — latency down <b>~35%</b>, cloud dependency down <b>~40%</b>.</li>
+        <li>Applied <b>GPTQ/AWQ quantization</b> for <b>~45% memory reduction</b> at <b>&gt;95% of baseline accuracy</b>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="h2"><h2>Selected work</h2><span class="rule"></span><span class="n">3 projects</span></div>
+  <div class="cards">
+    <div class="card">
+      <div class="tag">IEEE ICIICS-2026 · Published</div>
+      <h3>Post-training quantization for LLMs</h3>
+      <p>Benchmarked post-training quantization across Qwen-3, LLaMA-3.2 and GPT-2. Artefacts open-sourced on Hugging Face and picked up by practitioners.</p>
+      <div class="kpi"><div><div class="n">−40%</div><div class="l">memory</div></div><div><div class="n">−30%</div><div class="l">latency</div></div><div><div class="n">&lt;2%</div><div class="l">acc. drop</div></div></div>
+    </div>
+    <div class="card">
+      <div class="tag">2nd place, national</div>
+      <h3>Sahayak AI</h3>
+      <p>Multi-agent education platform automating lesson planning, quiz generation and delivery, with LLM personalisation. Team lead. Awarded at Agentic AI Day 2025 by Google Cloud &amp; Hack2Skill.</p>
+      <div class="kpi"><div><div class="n">−60%</div><div class="l">teacher prep</div></div><div><div class="n">2nd</div><div class="l">of nation</div></div></div>
+    </div>
+    <div class="card">
+      <div class="tag">Production · AiGenthix</div>
+      <h3>Multi-agent workflow platform</h3>
+      <p>A2A interaction patterns and MCP for structured tool use across five-plus deployed LLM systems, with evaluation gates before each release.</p>
+      <div class="kpi"><div><div class="n">−40%</div><div class="l">manual effort</div></div><div><div class="n">+30%</div><div class="l">retrieval rel.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="skills">
+  <div class="h2"><h2>Stack</h2><span class="rule"></span></div>
+  <dl>
+    <dt>Generative AI &amp; LLM</dt><dd><b>Fine-tuning</b>, RAG, quantization (GPTQ / AWQ / GGUF), inference optimization, evaluation &amp; benchmarking, context engineering, embeddings, semantic search</dd>
+    <dt>Agentic AI &amp; MCP</dt><dd><b>MCP</b>, A2A interaction patterns, tool use, function calling, multi-agent orchestration and pipelines</dd>
+    <dt>Languages &amp; ML</dt><dd><b>Python</b>, SQL, machine learning, deep learning, NLP, transformers, TensorFlow, PyTorch, prompt engineering</dd>
+    <dt>Frameworks &amp; tools</dt><dd><b>LangChain</b>, Hugging Face, OpenAI API, Anthropic Claude API, Claude Code, AWS Bedrock, Genkit, ADK, FastAPI</dd>
+    <dt>Cloud &amp; LLMOps</dt><dd><b>GCP</b>, AWS, Docker, Kubernetes, CI/CD, model deployment &amp; monitoring, edge AI, FAISS / Chroma</dd>
+    <dt>Data &amp; analytics</dt><dd>MySQL, MongoDB, Power BI, Tableau, feature engineering, data pipelines</dd>
+  </dl>
+</section>
+
+<section id="background">
+  <div class="h2"><h2>Background</h2><span class="rule"></span></div>
+  <div class="split">
+    <div>
+      <div class="grid2">
+        <div class="c"><div class="k">Postgraduate</div><div class="t">MBA — Data Analytics &amp; Marketing</div>
+          <div class="s">IFIM College, Bangalore · 2023–2025</div><div class="x">Analytics, strategy, data-driven decision-making</div></div>
+        <div class="c"><div class="k">Undergraduate</div><div class="t">B.E. — Electronics &amp; Communication</div>
+          <div class="s">Sapthagiri College of Engineering, Bangalore · 2019–2023</div><div class="x">Where the interest in constrained hardware began</div></div>
+        <div class="c"><div class="k">Certification</div><div class="t">Claude Certified Architect — Foundations</div>
+          <div class="s">Anthropic · Jun 2026 – Dec 2026</div><div class="x">cert azqtzxw2k57d</div></div>
+        <div class="c"><div class="k">Also certified</div><div class="t">Generative AI Mastery</div>
+          <div class="s">OpenAI Academy · Data Analytics, IIT Roorkee · Six Sigma White Belt</div></div>
+      </div>
+      <div class="grid2" style="margin-top:22px">
+        <div class="c"><div class="k">Off duty</div><div class="t">Car racing · PC games</div></div>
+        <div class="c"><div class="k">Based in</div><div class="t">Bangalore, India</div>
+          <div class="s">Open to AI / LLM engineering roles</div></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <figure><img src="assets/photo-graduation.jpg" alt="Avinash HM at the IFIM College graduation ceremony" loading="lazy">
+        <figcaption>IFIM College graduation</figcaption></figure>
+      <figure><img src="assets/photo-temple.jpg" alt="Avinash HM at a Hoysala temple" loading="lazy">
+        <figcaption>Off duty</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="h2"><h2>Contact</h2><span class="rule"></span><span class="n">Bangalore, India</span></div>
+  <p style="margin:0 0 14px;color:var(--muted);max-width:56ch">Open to AI and LLM engineering roles. Fastest by email — or ask the avatar above.</p>
+  <div class="contact-grid">
+    <a href="mailto:avi.hm24@gmail.com"><div class="k">Email · fastest</div><div class="v">avi.hm24@gmail.com</div></a>
+    <a href="tel:+918951228018"><div class="k">Phone</div><div class="v">+91 8951228018</div></a>
+    <a href="https://linkedin.com/in/avinash-hm007" target="_blank" rel="noopener"><div class="k">LinkedIn</div><div class="v">avinash-hm007</div></a>
+    <a href="https://github.com/Avinashhmavi" target="_blank" rel="noopener"><div class="k">GitHub</div><div class="v">Avinashhmavi</div></a>
+  </div>
+</section>
+
+<footer>
+  <span>Avinash HM — AI Engineer, Bangalore</span>
+  <span>Avatar answers are retrieved from the résumé. Nothing is generated.</span>
+</footer>
 </div>
+
+<div id="calib" hidden><h3>Anchor calibration</h3><div id="calibBody"></div><div id="calibOut"></div></div>
 
 <script>
   window.PORTRAIT_URL = 'assets/portrait.jpg';
@@ -4051,7 +4232,7 @@ void main() {
 
     gl_FragColor = vec4(col, a * 0.96);
   }
-`;function Al(i,t){t=t||{};var e=Object.assign({mouth:[.5,.418],mouthR:.115,chinY:.3,eyeL:[.408,.61],eyeR:[.592,.61],eyeR2:.062},t.anchors||{}),n=document.createElement("canvas");i.insertBefore(n,i.firstChild);var s;try{s=new Rs({canvas:n,antialias:!0,alpha:!0})}catch{return null}s.setPixelRatio(Math.min(window.devicePixelRatio,2));var r=new Cs,o=new ge(26,1,.1,50);o.position.z=4.2;var a=new fn;r.add(a);var l={uMap:{value:null},uMouth:{value:new Vt(e.mouth[0],e.mouth[1])},uMouthR:{value:e.mouthR},uEyeL:{value:new Vt(e.eyeL[0],e.eyeL[1])},uEyeR:{value:new Vt(e.eyeR[0],e.eyeR[1])},uEyeR2:{value:e.eyeR2},uChinY:{value:e.chinY},uJaw:{value:0},uWide:{value:0},uRound:{value:0},uBlink:{value:0}},c=t.aspect||.78,h=2,d=h/c,f=new xe(new sn(h,d,110,130),new Te({uniforms:l,vertexShader:em,fragmentShader:nm,transparent:!0}));a.add(f);var m={uJaw:{value:0},uWide:{value:0},uRound:{value:0},uTeeth:{value:0},uDark:{value:new Ft(3479835)},uTeethCol:{value:new Ft(15261398)}},v=new xe(new sn(h*.26,d*.115),new Te({uniforms:m,vertexShader:"varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }",fragmentShader:im,transparent:!0,depthWrite:!1}));v.position.set((e.mouth[0]-.5)*h,(e.mouth[1]-.5)*d,.01),a.add(v);var M=null;function p(y,k){new Ps().load(y,function(L){if(L.colorSpace=Ie,L.anisotropy=4,M=L,l.uMap.value=L,L.image&&L.image.width){var V=L.image.width/L.image.height;f.geometry.dispose(),d=h/V,f.geometry=new sn(h,d,110,130),v.position.y=(e.mouth[1]-.5)*d,v.geometry.dispose(),v.geometry=new sn(h*.26,d*.115),K()}k&&k()})}var u={jaw:0,wide:0,round:0,teeth:0},w=Object.assign({},u),S=0,E=1.4,D=-1,R=matchMedia("(prefers-reduced-motion: reduce)").matches;function A(y){var k={jaw:0,wide:0,round:0,teeth:0},L=0;for(var V in y){var Z=tm[V];if(Z){var B=y[V];k.jaw+=Z.jaw*B,k.wide+=Z.wide*B,k.round+=Z.round*B,k.teeth+=Z.teeth*B,L+=B}}L>1&&(k.jaw/=L,k.wide/=L,k.round/=L,k.teeth/=L),w=k}function O(){w={jaw:0,wide:0,round:0,teeth:0}}function K(){var y=i.clientWidth,k=i.clientHeight;if(!(!y||!k)){s.setSize(y,k,!1),o.aspect=y/k;var L=h/2/(Math.tan(Wa.degToRad(26)/2)*o.aspect),V=d/2/Math.tan(Wa.degToRad(26)/2);o.position.z=Math.max(L,V)*1.02,o.updateProjectionMatrix()}}"ResizeObserver"in window&&new ResizeObserver(K).observe(i),window.addEventListener("resize",K),K();var g=new Ls;return function y(){requestAnimationFrame(y);var k=Math.min(g.getDelta(),.05),L=g.elapsedTime,V=1-Math.pow(1e-4,k);if(u.jaw+=(w.jaw-u.jaw)*V,u.wide+=(w.wide-u.wide)*V,u.round+=(w.round-u.round)*V,u.teeth+=(w.teeth-u.teeth)*V,l.uJaw.value=u.jaw,l.uWide.value=u.wide,l.uRound.value=u.round,m.uJaw.value=u.jaw,m.uWide.value=u.wide,m.uRound.value=u.round,m.uTeeth.value=u.teeth,!R){if(D<0&&L>E&&(D=0,E=L+2.6+Math.random()*4.2),D>=0){D+=k;var Z=.13;S=D<Z/2?D/(Z/2):1-(D-Z/2)/(Z/2),D>Z&&(D=-1,S=0)}l.uBlink.value=Math.max(0,Math.min(1,S));var B=Math.sin(L*.72)*.0035;a.scale.set(1+B,1+B,1),a.rotation.y=Math.sin(L*.31)*.021+Math.sin(L*.13)*.012,a.rotation.x=Math.sin(L*.24+1.3)*.013,a.position.x=Math.sin(L*.19)*.012,a.position.y=Math.sin(L*.27+.6)*.008+u.jaw*.004}s.render(r,o)}(),{setPortrait:p,setVisemes:A,rest:O,anchors:e,uniforms:l}}var sm={a:"aa",e:"E",i:"I",o:"O",u:"U",p:"PP",b:"PP",m:"PP",f:"FF",v:"FF",t:"DD",d:"DD",k:"kk",g:"kk",c:"kk",q:"kk",x:"kk",j:"CH",s:"SS",z:"SS",n:"nn",l:"nn",r:"RR",w:"U",y:"I",h:"aa"},rm={aa:1,E:1,I:1,O:1,U:1};function am(i,t){var e=i.substr(t,2);return e==="th"?["TH",2]:e==="ch"||e==="sh"?["CH",2]:e==="ph"?["FF",2]:e==="ck"||e==="gh"?["kk",2]:e==="qu"?["kk",2]:e==="oo"?["U",2]:e==="ee"||e==="ea"?["I",2]:e==="ou"||e==="ow"?["O",2]:e==="ai"||e==="ay"?["E",2]:null}function Za(i,t){t=t||{};for(var e=t.rate||1,n=(t.charsPerSecond||14)*e,s=String(i).toLowerCase(),r=[],o=0,a=0;a<s.length;){var l=s[a],c=null,h=1;if(/[a-z]/.test(l)){var d=am(s,a);d?(c=d[0],h=d[1]):c=sm[l]||"DD"}else if(/\s/.test(l))c="sil";else if(/[.,;:!?]/.test(l))c="sil",h=1;else{a++;continue}var f=1/n,m=rm[c]?f*1.45:f*.85;c==="sil"&&(m=/[.!?]/.test(l)?f*4:f*1.6);var v=r[r.length-1];v&&v.v===c&&c!=="sil"?v.dur+=m*.5:r.push({t:o,dur:m,v:c,charIndex:a}),o+=m,a+=h}return{items:r,total:o}}function Tl(i){var t=null,e=0,n=!1,s=0,r=.055;function o(d){for(var f={},m=t.items,v=0;v<m.length;v++){var M=m[v];if(d<M.t-r)break;if(!(d>M.t+M.dur+r)){var p;d<M.t?p=(d-(M.t-r))/r:d>M.t+M.dur?p=1-(d-(M.t+M.dur))/r:p=1,p=Math.max(0,Math.min(1,p)),f[M.v]=Math.max(f[M.v]||0,p*p*(3-2*p))}}return f}function a(){if(n){var d=(performance.now()-e)/1e3;if(d>t.total+.25){h(),i({},!0);return}i(o(d),!1),s=requestAnimationFrame(a)}}function l(d){t=d,e=performance.now(),n=!0,cancelAnimationFrame(s),s=requestAnimationFrame(a)}function c(d){if(t){for(var f=t.items,m=0;m<f.length;m++)if(f[m].charIndex>=d){e=performance.now()-f[m].t*1e3;return}}}function h(){n=!1,cancelAnimationFrame(s)}return{start:l,anchor:c,stop:h,isPlaying:function(){return n}}}function Rl(){var i=window.speechSynthesis,t=[];function e(){t=i?i.getVoices():[]}i&&(e(),i.onvoiceschanged=e);function n(){t.length||e();for(var s=[/en[-_]IN/i,/India/i,/en[-_]GB/i,/en[-_]US/i],r=0;r<s.length;r++)for(var o=0;o<t.length;o++)if(s[r].test(t[o].lang)||s[r].test(t[o].name))return t[o];return t[0]||null}return{available:!!i,speak:function(s,r,o){if(!i)return o&&o(),null;i.cancel();var a=new SpeechSynthesisUtterance(s),l=n();return l&&(a.voice=l),a.rate=.97,a.pitch=.95,a.onboundary=function(c){r&&r(c.charIndex||0)},a.onend=function(){o&&o()},a.onerror=function(){o&&o()},i.speak(a),a},stop:function(){i&&i.cancel()},rate:.97}}function Cl(){var i=window.SpeechRecognition||window.webkitSpeechRecognition;if(!i)return{available:!1,start:function(){},stop:function(){}};var t=new i;t.continuous=!1,t.interimResults=!0,t.lang="en-IN";var e={};return t.onresult=function(n){for(var s="",r="",o=n.resultIndex;o<n.results.length;o++){var a=n.results[o];a.isFinal?r+=a[0].transcript:s+=a[0].transcript}s&&e.interim&&e.interim(s),r&&e.final&&e.final(r.trim())},t.onend=function(){e.end&&e.end()},t.onerror=function(n){e.error&&e.error(n.error)},{available:!0,on:function(n,s){return e[n]=s,this},start:function(){try{t.start()}catch{}},stop:function(){try{t.stop()}catch{}}}}var Fs={name:"Avinash HM",title:"AI Engineer",subtitle:"Generative AI & LLM Engineer \xB7 Agentic AI Specialist \xB7 Applied AI Researcher",location:"Bangalore, India",email:"avi.hm24@gmail.com",phone:"+91 8951228018",linkedin:"linkedin.com/in/avinash-hm007",github:"github.com/Avinashhmavi",site:"avihm.site"},Os=[{id:"summary",src:"R\xE9sum\xE9 \u2014 summary",tags:["yourself","summary","introduce","introduction","profile","overview","bio"],say:"I'm an AI engineer based in Bangalore, with over a year building production LLM systems, agentic workflows and RAG pipelines. I've delivered thirty to sixty percent efficiency gains across enterprise deployments. I work across the whole LLM lifecycle \u2014 fine-tuning, quantization, evaluation and benchmarking, inference optimisation, and containerised deployment. I'm also a published IEEE researcher in post-training quantization, and an Anthropic Claude Certified Architect."},{id:"aigenthix",src:"AiGenthix \xB7 Jul 2025 \u2013 Present",tags:["aigenthix","current","now","job","role","work","working","doing","present","company","building","build","today","currently"],say:"Right now I'm an AI Engineer at AiGenthix Technologies in Bangalore, since July 2025. I've architected and deployed more than five production LLM systems \u2014 chatbots, an AI interviewer, an AI receptionist and workflow automation tools \u2014 serving enterprise clients end to end."},{id:"rag",src:"AiGenthix \xB7 RAG architecture",tags:["rag","retrieval","vector","embedding","langchain","search","semantic","relevance"],say:"I designed RAG architectures using LangChain, embeddings and vector databases. That improved retrieval accuracy and response relevance by around thirty percent over a keyword baseline. I've worked with FAISS and Chroma for the vector side."},{id:"agents",src:"AiGenthix \xB7 Multi-agent workflows",tags:["agent","agentic","mcp","a2a","orchestration","tool","multi","protocol","autonomous"],say:"I build multi-agent agentic workflows using A2A interaction patterns and MCP, the Model Context Protocol, for structured tool use and agent-to-agent communication. That cut manual effort by about forty percent. I've also developed AI plugins using Claude Code and the Anthropic APIs, so agents can invoke external services autonomously."},{id:"eval",src:"AiGenthix \xB7 Evaluation",tags:["eval","evaluation","benchmark","test","quality","measure","accuracy","latency"],say:"I established LLM evaluation and benchmarking workflows \u2014 measuring retrieval quality, output accuracy and latency across model versions before anything ships."},{id:"deploy",src:"AiGenthix \xB7 Deployment",tags:["deploy","docker","kubernetes","devops","llmops","api","fastapi","rest","scale","production","infrastructure"],say:"I develop and integrate REST APIs to expose model endpoints, and deploy containerised AI services using Docker and Kubernetes with CI/CD, built for high-concurrency production loads."},{id:"jio",src:"Reliance Jio \xB7 Mar \u2013 Jun 2025",tags:["jio","reliance","intern","internship","previous","before","earlier"],say:"Before AiGenthix I was an ML Engineering Intern at Reliance Jio in Bangalore, from March to June 2025. I built an NLP-based email automation pipeline with intent detection and classifiers, which cut response turnaround time by about fifty percent."},{id:"quant",src:"Reliance Jio + IEEE ICIICS-2026",tags:["quantization","quantisation","gptq","awq","gguf","compress","memory","optimis","optimiz","edge","inference","latency","efficient","small","cheap","hardware"],say:"Quantization is the work I'm known for. At Jio I fine-tuned TensorFlow and PyTorch transformer models for edge deployment, cutting inference latency by around thirty-five percent and cloud dependency by about forty percent. Applying GPTQ and AWQ quantization gave roughly forty-five percent memory reduction on constrained hardware while holding more than ninety-five percent of baseline accuracy."},{id:"ieee",src:"IEEE ICIICS-2026",tags:["ieee","paper","publication","research","published","conference","academic","journal"],say:"I have an IEEE conference paper at ICIICS-2026 \u2014 the Third International Conference on Integrated Intelligence and Communication Systems. It's titled 'Practical Implementation and Assessment of Post-Training Quantization Methods for Large Language Models'. I benchmarked post-training quantization on Qwen-3, LLaMA-3.2 and GPT-2, achieving about forty percent memory reduction and thirty percent faster inference with under two percent accuracy degradation. The artefacts are open-sourced on Hugging Face."},{id:"sahayak",src:"Sahayak AI \xB7 Agentic AI Day 2025",tags:["sahayak","award","win","won","hackathon","competition","project","edtech","teacher","teaching","lesson","second","prize","google","hack2skill","lead","team"],say:"Sahayak AI is a multi-agent education platform I led, built in March and April 2025. It automates lesson planning, quiz generation and content delivery, and cut teacher preparation time by about sixty percent. It won second place nationally at Agentic AI Day 2025, run by Google Cloud and Hack2Skill."},{id:"skills",src:"R\xE9sum\xE9 \u2014 technical skills",tags:["skill","stack","tech","technology","language","framework","tool","python","know","proficient","experience"],say:"My core stack is Python and SQL, with PyTorch and TensorFlow for modelling. On the generative side: fine-tuning, RAG, quantization, inference optimisation, evaluation, embeddings and semantic search. For agents: MCP, A2A patterns, tool use and multi-agent orchestration. Frameworks are LangChain, Hugging Face, the OpenAI and Anthropic APIs, Claude Code, AWS Bedrock, Genkit, ADK and FastAPI. Infrastructure is GCP, AWS, Docker, Kubernetes and CI/CD, with FAISS and Chroma for vectors."},{id:"education",src:"R\xE9sum\xE9 \u2014 education",tags:["education","degree","study","studied","college","university","mba","engineering","graduate","school","qualification"],say:"I did my B.E. in Electronics and Communication Engineering at Sapthagiri College of Engineering in Bangalore, from 2019 to 2023. Then an MBA in Data Analytics and Marketing at IFIM College, from 2023 to 2025. The electronics background is where the interest in running models on constrained hardware comes from, and the MBA is the business side \u2014 whether a system is worth running, not just whether it works."},{id:"certs",src:"R\xE9sum\xE9 \u2014 certifications",tags:["certification","certified","certificate","anthropic","claude","course","credential"],say:"I'm an Anthropic Claude Certified Architect at Foundations level, certified from June 2026. I also hold Generative AI Mastery from OpenAI Academy, a Data Analytics certification from IIT Roorkee, and a Six Sigma White Belt."},{id:"contact",src:"R\xE9sum\xE9 \u2014 contact",tags:["contact","email","reach","hire","call","phone","touch","connect","linkedin","github"],say:"The fastest way to reach me is email \u2014 avi dot hm twenty-four at gmail dot com. My phone is plus nine one, eight nine five one, two two eight zero one eight. I'm on LinkedIn as avinash-hm007 and GitHub as Avinashhmavi."},{id:"hobbies",src:"R\xE9sum\xE9 \u2014 interests",tags:["hobby","hobbies","fun","free time","outside","interest","personal","offline","weekend"],say:"Outside work I'm into car racing and PC games."},{id:"strength",src:"R\xE9sum\xE9 \u2014 summary + record",tags:["strength","best","good at","strongest","why","hire","value","bring","special","different","stand out"],say:"The thing I'd point to is that I connect research to production. The quantization work isn't just a paper \u2014 it came out of a real edge deployment at Jio, and it runs. And the MBA means I frame things in terms a business can act on. That's why my work tends to be measured in percentages rather than adjectives."}],Bs={tags:["salary","ctc","compensation","pay","package","lpa","notice","period","relocate","relocation","visa","sponsor","availability","available","join","joining","when can you start","remote","onsite","expectation"],say:"That's something I'd rather answer directly than have my avatar guess at \u2014 it isn't in my r\xE9sum\xE9, so I've deliberately not scripted it. Drop me an email at avi.hm24@gmail.com and I'll give you a straight answer.",src:"Not in r\xE9sum\xE9 \u2014 deliberately not answered"},Di={say:"I don't have that in my record, so I won't guess at it. I can tell you about my work at AiGenthix or Reliance Jio, my quantization research, the agentic systems I've built, or my background. What would be most useful?",src:"Out of corpus"},Il=["Tell me about yourself","What did you do at Reliance Jio?","Explain your quantization research","What are you building right now?","Why should we hire you?"];var om={the:1,a:1,an:1,is:1,are:1,was:1,were:1,do:1,does:1,did:1,you:1,your:1,me:1,my:1,i:1,yours:1,to:1,of:1,in:1,on:1,for:1,and:1,or:1,what:1,how:1,can:1,could:1,would:1,tell:1,about:1,with:1,that:1,this:1,have:1,has:1,any:1,at:1,it:1,so:1};function lm(i){return String(i||"").toLowerCase().replace(/[^a-z0-9\s]/g," ").split(/\s+/).filter(Boolean)}function Pl(i){return i.length>4&&i.slice(-3)==="ies"?i.slice(0,-3)+"y":i.length>4&&i.slice(-2)==="es"&&"sxz".indexOf(i.slice(-3,-2))>=0?i.slice(0,-2):i.length>3&&i.slice(-1)==="s"&&i.slice(-2)!=="ss"?i.slice(0,-1):i}function Ll(i,t,e){for(var n=0,s=0;s<e.length;s++){var r=e[s];if(r.indexOf(" ")>=0){t.indexOf(r)>=0&&(n+=6);continue}for(var o=0;o<i.length;o++){var a=i[o];if(!(om[a]||a.length<3)){var l=Pl(a),c=Pl(r);a===r||l===c?n+=3+Math.min(r.length,12)*.25:a.length>=5&&r.length>=5&&(l.indexOf(c)===0||c.indexOf(l)===0)&&(n+=2.5)}}}return n}function Ul(i){var t=String(i||"").toLowerCase(),e=lm(i);if(!e.length)return{text:Di.say,src:Di.src,id:"fallback"};if(Ll(e,t,Bs.tags)>=3.5)return{text:Bs.say,src:Bs.src,id:"gap"};for(var n=null,s=0,r=0;r<Os.length;r++){var o=Ll(e,t,Os[r].tags);o>s&&(s=o,n=Os[r])}return!n||s<3.5?{text:Di.say,src:Di.src,id:"fallback"}:{text:n.say,src:n.src,id:n.id}}var jt=function(i){return document.querySelector(i)},cm=jt("#stage"),he=Al(cm,{anchors:window.FACE_ANCHORS||void 0});he?he.setPortrait(window.PORTRAIT_URL||"assets/portrait-placeholder.jpg"):jt("#nowebgl").hidden=!1;var Ni=Rl(),zs=Cl(),gi=Tl(function(i,t){he&&(t?he.rest():he.setVisemes(i))}),Ja=jt("#transcript"),_i=!1;function Dl(i,t,e){var n=document.createElement("div");return n.className="turn "+i,n.innerHTML='<div class="say"></div>'+(e?'<div class="src"></div>':""),n.querySelector(".say").textContent=t,e&&(n.querySelector(".src").textContent=e),Ja.appendChild(n),Ja.scrollTop=Ja.scrollHeight,n}function Vs(i){if(!_i){_i=!0,jt("#mic").setAttribute("aria-pressed","false"),Dl("them",i);var t=Ul(i);yn("speaking");var e=Dl("him",t.text,t.src),n=Za(t.text,{rate:Ni.rate});gi.start(n),Ni.speak(t.text,function(s){gi.anchor(s)},function(){gi.stop(),he&&he.rest(),_i=!1,yn("idle")}),Ni.available||setTimeout(function(){gi.stop(),he&&he.rest(),_i=!1,yn("idle")},n.total*1e3+200),e.scrollIntoView({block:"nearest"})}}function yn(i){var t=jt("#status");t.dataset.state=i,t.textContent=i==="speaking"?"speaking":i==="listening"?"listening":"ready"}Il.forEach(function(i){var t=document.createElement("button");t.className="chip",t.type="button",t.textContent=i,t.addEventListener("click",function(){Vs(i)}),jt("#suggest").appendChild(t)});jt("#form").addEventListener("submit",function(i){i.preventDefault();var t=jt("#q").value.trim();t&&(jt("#q").value="",Vs(t))});var ks=!1;zs.available?(zs.on("interim",function(i){jt("#q").value=i}).on("final",function(i){jt("#q").value="",Vs(i)}).on("end",function(){ks=!1,jt("#mic").setAttribute("aria-pressed","false"),_i||yn("idle")}).on("error",function(){ks=!1,jt("#mic").setAttribute("aria-pressed","false"),yn("idle")}),jt("#mic").addEventListener("click",function(){if(ks){zs.stop();return}Ni.stop(),gi.stop(),he&&he.rest(),ks=!0,jt("#mic").setAttribute("aria-pressed","true"),yn("listening"),zs.start()})):(jt("#mic").disabled=!0,jt("#mic").title="Speech recognition needs Chrome or Edge");jt("#stop").addEventListener("click",function(){Ni.stop(),gi.stop(),he&&he.rest(),_i=!1,yn("idle")});jt("#who").textContent=Fs.name;jt("#role").textContent=Fs.title+" \xB7 "+Fs.location;yn("idle");window.addEventListener("keydown",function(i){if(!(i.key!=="c"&&i.key!=="C")&&he){var t=jt("#calib");t.hidden=!t.hidden,t.hidden||hm()}});function hm(){var i=he.uniforms,t=[["mouth x","uMouth","x",0,1],["mouth y","uMouth","y",0,1],["mouth radius","uMouthR",null,.02,.3],["chin y","uChinY",null,0,1],["eye L x","uEyeL","x",0,1],["eye L y","uEyeL","y",0,1],["eye R x","uEyeR","x",0,1],["eye R y","uEyeR","y",0,1],["eye radius","uEyeR2",null,.01,.2]],e=jt("#calibBody");e.innerHTML="",t.forEach(function(n){var s=n[2]?i[n[1]].value[n[2]]:i[n[1]].value,r=document.createElement("label");r.innerHTML="<span>"+n[0]+'</span><input type="range" min="'+n[3]+'" max="'+n[4]+'" step="0.002" value="'+s+'"><b>'+(+s).toFixed(3)+"</b>";var o=r.querySelector("input"),a=r.querySelector("b");o.addEventListener("input",function(){var l=+o.value;a.textContent=l.toFixed(3),n[2]?i[n[1]].value[n[2]]=l:i[n[1]].value=l,Nl()}),e.appendChild(r)}),Nl()}function Nl(){var i=he.uniforms;jt("#calibOut").textContent=JSON.stringify({mouth:[+i.uMouth.value.x.toFixed(3),+i.uMouth.value.y.toFixed(3)],mouthR:+i.uMouthR.value.toFixed(3),chinY:+i.uChinY.value.toFixed(3),eyeL:[+i.uEyeL.value.x.toFixed(3),+i.uEyeL.value.y.toFixed(3)],eyeR:[+i.uEyeR.value.x.toFixed(3),+i.uEyeR.value.y.toFixed(3)],eyeR2:+i.uEyeR2.value.toFixed(3)})}window.__avatar={answer:Vs,face:he,schedule:Za};
+`;function Al(i,t){t=t||{};var e=Object.assign({mouth:[.5,.418],mouthR:.115,chinY:.3,eyeL:[.408,.61],eyeR:[.592,.61],eyeR2:.062},t.anchors||{}),n=document.createElement("canvas");i.insertBefore(n,i.firstChild);var s;try{s=new Rs({canvas:n,antialias:!0,alpha:!0})}catch{return null}s.setPixelRatio(Math.min(window.devicePixelRatio,2));var r=new Cs,o=new ge(26,1,.1,50);o.position.z=4.2;var a=new fn;r.add(a);var l={uMap:{value:null},uMouth:{value:new Vt(e.mouth[0],e.mouth[1])},uMouthR:{value:e.mouthR},uEyeL:{value:new Vt(e.eyeL[0],e.eyeL[1])},uEyeR:{value:new Vt(e.eyeR[0],e.eyeR[1])},uEyeR2:{value:e.eyeR2},uChinY:{value:e.chinY},uJaw:{value:0},uWide:{value:0},uRound:{value:0},uBlink:{value:0}},c=t.aspect||.78,h=2,d=h/c,f=new xe(new sn(h,d,110,130),new Te({uniforms:l,vertexShader:em,fragmentShader:nm,transparent:!0}));a.add(f);var m={uJaw:{value:0},uWide:{value:0},uRound:{value:0},uTeeth:{value:0},uDark:{value:new Ft(3479835)},uTeethCol:{value:new Ft(15261398)}},v=new xe(new sn(h*.26,d*.115),new Te({uniforms:m,vertexShader:"varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }",fragmentShader:im,transparent:!0,depthWrite:!1}));v.position.set((e.mouth[0]-.5)*h,(e.mouth[1]-.5)*d,.01),a.add(v);var M=null;function p(y,k){new Ps().load(y,function(L){if(L.colorSpace=Ie,L.anisotropy=4,M=L,l.uMap.value=L,L.image&&L.image.width){var V=L.image.width/L.image.height;f.geometry.dispose(),d=h/V,f.geometry=new sn(h,d,110,130),v.position.y=(e.mouth[1]-.5)*d,v.geometry.dispose(),v.geometry=new sn(h*.26,d*.115),K()}k&&k()})}var u={jaw:0,wide:0,round:0,teeth:0},w=Object.assign({},u),S=0,E=1.4,D=-1,R=matchMedia("(prefers-reduced-motion: reduce)").matches;function A(y){var k={jaw:0,wide:0,round:0,teeth:0},L=0;for(var V in y){var Z=tm[V];if(Z){var B=y[V];k.jaw+=Z.jaw*B,k.wide+=Z.wide*B,k.round+=Z.round*B,k.teeth+=Z.teeth*B,L+=B}}L>1&&(k.jaw/=L,k.wide/=L,k.round/=L,k.teeth/=L),w=k}function O(){w={jaw:0,wide:0,round:0,teeth:0}}function K(){var y=i.clientWidth,k=i.clientHeight;if(!(!y||!k)){s.setSize(y,k,!1),o.aspect=y/k;var L=h/2/(Math.tan(Wa.degToRad(26)/2)*o.aspect),V=d/2/Math.tan(Wa.degToRad(26)/2);o.position.z=Math.max(L,V)*1.02,o.updateProjectionMatrix()}}"ResizeObserver"in window&&new ResizeObserver(K).observe(i),window.addEventListener("resize",K),K();var g=new Ls;return function y(){requestAnimationFrame(y);var k=Math.min(g.getDelta(),.05),L=g.elapsedTime,V=1-Math.pow(1e-4,k);if(u.jaw+=(w.jaw-u.jaw)*V,u.wide+=(w.wide-u.wide)*V,u.round+=(w.round-u.round)*V,u.teeth+=(w.teeth-u.teeth)*V,l.uJaw.value=u.jaw,l.uWide.value=u.wide,l.uRound.value=u.round,m.uJaw.value=u.jaw,m.uWide.value=u.wide,m.uRound.value=u.round,m.uTeeth.value=u.teeth,!R){if(D<0&&L>E&&(D=0,E=L+2.6+Math.random()*4.2),D>=0){D+=k;var Z=.13;S=D<Z/2?D/(Z/2):1-(D-Z/2)/(Z/2),D>Z&&(D=-1,S=0)}l.uBlink.value=Math.max(0,Math.min(1,S));var B=Math.sin(L*.72)*.0035;a.scale.set(1+B,1+B,1),a.rotation.y=Math.sin(L*.31)*.021+Math.sin(L*.13)*.012,a.rotation.x=Math.sin(L*.24+1.3)*.013,a.position.x=Math.sin(L*.19)*.012,a.position.y=Math.sin(L*.27+.6)*.008+u.jaw*.004}s.render(r,o)}(),{setPortrait:p,setVisemes:A,rest:O,anchors:e,uniforms:l}}var sm={a:"aa",e:"E",i:"I",o:"O",u:"U",p:"PP",b:"PP",m:"PP",f:"FF",v:"FF",t:"DD",d:"DD",k:"kk",g:"kk",c:"kk",q:"kk",x:"kk",j:"CH",s:"SS",z:"SS",n:"nn",l:"nn",r:"RR",w:"U",y:"I",h:"aa"},rm={aa:1,E:1,I:1,O:1,U:1};function am(i,t){var e=i.substr(t,2);return e==="th"?["TH",2]:e==="ch"||e==="sh"?["CH",2]:e==="ph"?["FF",2]:e==="ck"||e==="gh"?["kk",2]:e==="qu"?["kk",2]:e==="oo"?["U",2]:e==="ee"||e==="ea"?["I",2]:e==="ou"||e==="ow"?["O",2]:e==="ai"||e==="ay"?["E",2]:null}function Za(i,t){t=t||{};for(var e=t.rate||1,n=(t.charsPerSecond||14)*e,s=String(i).toLowerCase(),r=[],o=0,a=0;a<s.length;){var l=s[a],c=null,h=1;if(/[a-z]/.test(l)){var d=am(s,a);d?(c=d[0],h=d[1]):c=sm[l]||"DD"}else if(/\s/.test(l))c="sil";else if(/[.,;:!?]/.test(l))c="sil",h=1;else{a++;continue}var f=1/n,m=rm[c]?f*1.45:f*.85;c==="sil"&&(m=/[.!?]/.test(l)?f*4:f*1.6);var v=r[r.length-1];v&&v.v===c&&c!=="sil"?v.dur+=m*.5:r.push({t:o,dur:m,v:c,charIndex:a}),o+=m,a+=h}return{items:r,total:o}}function Tl(i){var t=null,e=0,n=!1,s=0,r=.055;function o(d){for(var f={},m=t.items,v=0;v<m.length;v++){var M=m[v];if(d<M.t-r)break;if(!(d>M.t+M.dur+r)){var p;d<M.t?p=(d-(M.t-r))/r:d>M.t+M.dur?p=1-(d-(M.t+M.dur))/r:p=1,p=Math.max(0,Math.min(1,p)),f[M.v]=Math.max(f[M.v]||0,p*p*(3-2*p))}}return f}function a(){if(n){var d=(performance.now()-e)/1e3;if(d>t.total+.25){h(),i({},!0);return}i(o(d),!1),s=requestAnimationFrame(a)}}function l(d){t=d,e=performance.now(),n=!0,cancelAnimationFrame(s),s=requestAnimationFrame(a)}function c(d){if(t){for(var f=t.items,m=0;m<f.length;m++)if(f[m].charIndex>=d){e=performance.now()-f[m].t*1e3;return}}}function h(){n=!1,cancelAnimationFrame(s)}return{start:l,anchor:c,stop:h,isPlaying:function(){return n}}}function Rl(){var i=window.speechSynthesis,t=[];function e(){t=i?i.getVoices():[]}i&&(e(),i.onvoiceschanged=e);function n(){t.length||e();for(var s=[/en[-_]IN/i,/India/i,/en[-_]GB/i,/en[-_]US/i],r=0;r<s.length;r++)for(var o=0;o<t.length;o++)if(s[r].test(t[o].lang)||s[r].test(t[o].name))return t[o];return t[0]||null}return{available:!!i,speak:function(s,r,o){if(!i)return o&&o(),null;i.cancel();var a=new SpeechSynthesisUtterance(s),l=n();return l&&(a.voice=l),a.rate=.97,a.pitch=.95,a.onboundary=function(c){r&&r(c.charIndex||0)},a.onend=function(){o&&o()},a.onerror=function(){o&&o()},i.speak(a),a},stop:function(){i&&i.cancel()},rate:.97}}function Cl(){var i=window.SpeechRecognition||window.webkitSpeechRecognition;if(!i)return{available:!1,start:function(){},stop:function(){}};var t=new i;t.continuous=!1,t.interimResults=!0,t.lang="en-IN";var e={};return t.onresult=function(n){for(var s="",r="",o=n.resultIndex;o<n.results.length;o++){var a=n.results[o];a.isFinal?r+=a[0].transcript:s+=a[0].transcript}s&&e.interim&&e.interim(s),r&&e.final&&e.final(r.trim())},t.onend=function(){e.end&&e.end()},t.onerror=function(n){e.error&&e.error(n.error)},{available:!0,on:function(n,s){return e[n]=s,this},start:function(){try{t.start()}catch{}},stop:function(){try{t.stop()}catch{}}}}var Fs={name:"Avinash HM",title:"AI Engineer",subtitle:"Generative AI & LLM Engineer \xB7 Agentic AI Specialist \xB7 Applied AI Researcher",location:"Bangalore, India",email:"avi.hm24@gmail.com",phone:"+91 8951228018",linkedin:"linkedin.com/in/avinash-hm007",github:"github.com/Avinashhmavi",site:"avihm.site"},Os=[{id:"summary",src:"R\xE9sum\xE9 \u2014 summary",tags:["yourself","summary","introduce","introduction","profile","overview","bio"],say:"I'm an AI engineer based in Bangalore, with over a year building production LLM systems, agentic workflows and RAG pipelines. I've delivered thirty to sixty percent efficiency gains across enterprise deployments. I work across the whole LLM lifecycle \u2014 fine-tuning, quantization, evaluation and benchmarking, inference optimisation, and containerised deployment. I'm also a published IEEE researcher in post-training quantization, and an Anthropic Claude Certified Architect."},{id:"aigenthix",src:"AiGenthix \xB7 Jul 2025 \u2013 Present",tags:["aigenthix","current","now","job","role","work","working","doing","present","company","building","build","today","currently"],say:"Right now I'm an AI Engineer at AiGenthix Technologies in Bangalore, since July 2025. I've architected and deployed more than five production LLM systems \u2014 chatbots, an AI interviewer, an AI receptionist and workflow automation tools \u2014 serving enterprise clients end to end."},{id:"rag",src:"AiGenthix \xB7 RAG architecture",tags:["rag","retrieval","vector","embedding","langchain","search","semantic","relevance"],say:"I designed RAG architectures using LangChain, embeddings and vector databases. That improved retrieval accuracy and response relevance by around thirty percent over a keyword baseline. I've worked with FAISS and Chroma for the vector side."},{id:"agents",src:"AiGenthix \xB7 Multi-agent workflows",tags:["agent","agentic","mcp","a2a","orchestration","tool","multi","protocol","autonomous"],say:"I build multi-agent agentic workflows using A2A interaction patterns and MCP, the Model Context Protocol, for structured tool use and agent-to-agent communication. That cut manual effort by about forty percent. I've also developed AI plugins using Claude Code and the Anthropic APIs, so agents can invoke external services autonomously."},{id:"eval",src:"AiGenthix \xB7 Evaluation",tags:["eval","evaluation","benchmark","test","quality","measure","accuracy","latency"],say:"I established LLM evaluation and benchmarking workflows \u2014 measuring retrieval quality, output accuracy and latency across model versions before anything ships."},{id:"deploy",src:"AiGenthix \xB7 Deployment",tags:["deploy","docker","kubernetes","devops","llmops","api","fastapi","rest","scale","production","infrastructure"],say:"I develop and integrate REST APIs to expose model endpoints, and deploy containerised AI services using Docker and Kubernetes with CI/CD, built for high-concurrency production loads."},{id:"jio",src:"Reliance Jio \xB7 Mar \u2013 Jun 2025",tags:["jio","reliance","intern","internship","previous","before","earlier"],say:"Before AiGenthix I was an ML Engineering Intern at Reliance Jio in Bangalore, from March to June 2025. I built an NLP-based email automation pipeline with intent detection and classifiers, which cut response turnaround time by about fifty percent."},{id:"quant",src:"Reliance Jio + IEEE ICIICS-2026",tags:["quantization","quantisation","gptq","awq","gguf","compress","memory","optimis","optimiz","edge","inference","latency","efficient","small","cheap","hardware"],say:"Quantization is the work I'm known for. At Jio I fine-tuned TensorFlow and PyTorch transformer models for edge deployment, cutting inference latency by around thirty-five percent and cloud dependency by about forty percent. Applying GPTQ and AWQ quantization gave roughly forty-five percent memory reduction on constrained hardware while holding more than ninety-five percent of baseline accuracy."},{id:"ieee",src:"IEEE ICIICS-2026",tags:["ieee","paper","publication","research","published","conference","academic","journal"],say:"I have an IEEE conference paper at ICIICS-2026 \u2014 the Third International Conference on Integrated Intelligence and Communication Systems. It's titled 'Practical Implementation and Assessment of Post-Training Quantization Methods for Large Language Models'. I benchmarked post-training quantization on Qwen-3, LLaMA-3.2 and GPT-2, achieving about forty percent memory reduction and thirty percent faster inference with under two percent accuracy degradation. The artefacts are open-sourced on Hugging Face."},{id:"sahayak",src:"Sahayak AI \xB7 Agentic AI Day 2025",tags:["sahayak","award","win","won","hackathon","competition","project","edtech","teacher","teaching","lesson","second","prize","google","hack2skill","lead","team"],say:"Sahayak AI is a multi-agent education platform I led, built in March and April 2025. It automates lesson planning, quiz generation and content delivery, and cut teacher preparation time by about sixty percent. It won second place nationally at Agentic AI Day 2025, run by Google Cloud and Hack2Skill."},{id:"skills",src:"R\xE9sum\xE9 \u2014 technical skills",tags:["skill","stack","tech","technology","language","framework","tool","python","know","proficient","experience"],say:"My core stack is Python and SQL, with PyTorch and TensorFlow for modelling. On the generative side: fine-tuning, RAG, quantization, inference optimisation, evaluation, embeddings and semantic search. For agents: MCP, A2A patterns, tool use and multi-agent orchestration. Frameworks are LangChain, Hugging Face, the OpenAI and Anthropic APIs, Claude Code, AWS Bedrock, Genkit, ADK and FastAPI. Infrastructure is GCP, AWS, Docker, Kubernetes and CI/CD, with FAISS and Chroma for vectors."},{id:"education",src:"R\xE9sum\xE9 \u2014 education",tags:["education","degree","study","studied","college","university","mba","engineering","graduate","school","qualification"],say:"I did my B.E. in Electronics and Communication Engineering at Sapthagiri College of Engineering in Bangalore, from 2019 to 2023. Then an MBA in Data Analytics and Marketing at IFIM College, from 2023 to 2025. The electronics background is where the interest in running models on constrained hardware comes from, and the MBA is the business side \u2014 whether a system is worth running, not just whether it works."},{id:"certs",src:"R\xE9sum\xE9 \u2014 certifications",tags:["certification","certified","certificate","anthropic","claude","course","credential"],say:"I'm an Anthropic Claude Certified Architect at Foundations level, certified from June 2026. I also hold Generative AI Mastery from OpenAI Academy, a Data Analytics certification from IIT Roorkee, and a Six Sigma White Belt."},{id:"contact",src:"R\xE9sum\xE9 \u2014 contact",tags:["contact","email","reach","hire","call","phone","touch","connect","linkedin","github"],say:"The fastest way to reach me is email \u2014 avi dot hm twenty-four at gmail dot com. My phone is plus nine one, eight nine five one, two two eight zero one eight. I'm on LinkedIn as avinash-hm007 and GitHub as Avinashhmavi."},{id:"hobbies",src:"R\xE9sum\xE9 \u2014 interests",tags:["hobby","hobbies","fun","free time","outside","interest","personal","offline","weekend"],say:"Outside work I'm into car racing and PC games."},{id:"strength",src:"R\xE9sum\xE9 \u2014 summary + record",tags:["strength","best","good at","strongest","why","hire","value","bring","special","different","stand out"],say:"The thing I'd point to is that I connect research to production. The quantization work isn't just a paper \u2014 it came out of a real edge deployment at Jio, and it runs. And the MBA means I frame things in terms a business can act on. That's why my work tends to be measured in percentages rather than adjectives."}],Bs={tags:["salary","ctc","compensation","pay","package","lpa","notice","period","relocate","relocation","visa","sponsor","availability","available","join","joining","when can you start","remote","onsite","expectation"],say:"That's something I'd rather answer directly than have my avatar guess at \u2014 it isn't in my r\xE9sum\xE9, so I've deliberately not scripted it. Drop me an email at avi.hm24@gmail.com and I'll give you a straight answer.",src:"Not in r\xE9sum\xE9 \u2014 deliberately not answered"},Di={say:"I don't have that in my record, so I won't guess at it. I can tell you about my work at AiGenthix or Reliance Jio, my quantization research, the agentic systems I've built, or my background. What would be most useful?",src:"Out of corpus"},Il=["Tell me about yourself","What did you do at Reliance Jio?","Explain your quantization research","What are you building right now?","Why should we hire you?"];var om={the:1,a:1,an:1,is:1,are:1,was:1,were:1,do:1,does:1,did:1,you:1,your:1,me:1,my:1,i:1,yours:1,to:1,of:1,in:1,on:1,for:1,and:1,or:1,what:1,how:1,can:1,could:1,would:1,tell:1,about:1,with:1,that:1,this:1,have:1,has:1,any:1,at:1,it:1,so:1};function lm(i){return String(i||"").toLowerCase().replace(/[^a-z0-9\s]/g," ").split(/\s+/).filter(Boolean)}function Pl(i){return i.length>4&&i.slice(-3)==="ies"?i.slice(0,-3)+"y":i.length>4&&i.slice(-2)==="es"&&"sxz".indexOf(i.slice(-3,-2))>=0?i.slice(0,-2):i.length>3&&i.slice(-1)==="s"&&i.slice(-2)!=="ss"?i.slice(0,-1):i}function Ll(i,t,e){for(var n=0,s=0;s<e.length;s++){var r=e[s];if(r.indexOf(" ")>=0){t.indexOf(r)>=0&&(n+=6);continue}for(var o=0;o<i.length;o++){var a=i[o];if(!(om[a]||a.length<3)){var l=Pl(a),c=Pl(r);a===r||l===c?n+=3+Math.min(r.length,12)*.25:a.length>=5&&r.length>=5&&(l.indexOf(c)===0||c.indexOf(l)===0)&&(n+=2.5)}}}return n}function Ul(i){var t=String(i||"").toLowerCase(),e=lm(i);if(!e.length)return{text:Di.say,src:Di.src,id:"fallback"};if(Ll(e,t,Bs.tags)>=3.5)return{text:Bs.say,src:Bs.src,id:"gap"};for(var n=null,s=0,r=0;r<Os.length;r++){var o=Ll(e,t,Os[r].tags);o>s&&(s=o,n=Os[r])}return!n||s<3.5?{text:Di.say,src:Di.src,id:"fallback"}:{text:n.say,src:n.src,id:n.id}}var jt=function(i){return document.querySelector(i)},cm=jt("#stage"),he=Al(cm,{anchors:window.FACE_ANCHORS||void 0});he?he.setPortrait(window.PORTRAIT_URL||"assets/portrait-placeholder.jpg"):jt("#nowebgl").hidden=!1;var Ni=Rl(),zs=Cl(),gi=Tl(function(i,t){he&&(t?he.rest():he.setVisemes(i))}),Ja=jt("#transcript"),_i=!1;function Dl(i,t,e){var n=document.createElement("div");return n.className="turn "+i,n.innerHTML='<div class="say"></div>'+(e?'<div class="src"></div>':""),n.querySelector(".say").textContent=t,e&&(n.querySelector(".src").textContent=e),Ja.appendChild(n),Ja.scrollTop=Ja.scrollHeight,n}function Vs(i){if(!_i){_i=!0,jt("#mic").setAttribute("aria-pressed","false"),Dl("them",i);var t=Ul(i);yn("speaking");var e=Dl("him",t.text,t.src),n=Za(t.text,{rate:Ni.rate});gi.start(n),Ni.speak(t.text,function(s){gi.anchor(s)},function(){gi.stop(),he&&he.rest(),_i=!1,yn("idle")}),Ni.available||setTimeout(function(){gi.stop(),he&&he.rest(),_i=!1,yn("idle")},n.total*1e3+200),e.scrollIntoView({block:"nearest"})}}function yn(i){jt("#status").textContent=i==="speaking"?"speaking":i==="listening"?"listening":"ready";var t=jt("#dot");t&&(t.className=i==="speaking"?"on":i==="listening"?"hot":"")}Il.forEach(function(i){var t=document.createElement("button");t.className="chip",t.type="button",t.textContent=i,t.addEventListener("click",function(){Vs(i)}),jt("#suggest").appendChild(t)});jt("#form").addEventListener("submit",function(i){i.preventDefault();var t=jt("#q").value.trim();t&&(jt("#q").value="",Vs(t))});var ks=!1;zs.available?(zs.on("interim",function(i){jt("#q").value=i}).on("final",function(i){jt("#q").value="",Vs(i)}).on("end",function(){ks=!1,jt("#mic").setAttribute("aria-pressed","false"),_i||yn("idle")}).on("error",function(){ks=!1,jt("#mic").setAttribute("aria-pressed","false"),yn("idle")}),jt("#mic").addEventListener("click",function(){if(ks){zs.stop();return}Ni.stop(),gi.stop(),he&&he.rest(),ks=!0,jt("#mic").setAttribute("aria-pressed","true"),yn("listening"),zs.start()})):(jt("#mic").disabled=!0,jt("#mic").title="Speech recognition needs Chrome or Edge");jt("#stop").addEventListener("click",function(){Ni.stop(),gi.stop(),he&&he.rest(),_i=!1,yn("idle")});jt("#who").textContent=Fs.name;jt("#role").textContent=Fs.title+" \xB7 "+Fs.location;yn("idle");window.addEventListener("keydown",function(i){if(!(i.key!=="c"&&i.key!=="C")&&he){var t=jt("#calib");t.hidden=!t.hidden,t.hidden||hm()}});function hm(){var i=he.uniforms,t=[["mouth x","uMouth","x",0,1],["mouth y","uMouth","y",0,1],["mouth radius","uMouthR",null,.02,.3],["chin y","uChinY",null,0,1],["eye L x","uEyeL","x",0,1],["eye L y","uEyeL","y",0,1],["eye R x","uEyeR","x",0,1],["eye R y","uEyeR","y",0,1],["eye radius","uEyeR2",null,.01,.2]],e=jt("#calibBody");e.innerHTML="",t.forEach(function(n){var s=n[2]?i[n[1]].value[n[2]]:i[n[1]].value,r=document.createElement("label");r.innerHTML="<span>"+n[0]+'</span><input type="range" min="'+n[3]+'" max="'+n[4]+'" step="0.002" value="'+s+'"><b>'+(+s).toFixed(3)+"</b>";var o=r.querySelector("input"),a=r.querySelector("b");o.addEventListener("input",function(){var l=+o.value;a.textContent=l.toFixed(3),n[2]?i[n[1]].value[n[2]]=l:i[n[1]].value=l,Nl()}),e.appendChild(r)}),Nl()}function Nl(){var i=he.uniforms;jt("#calibOut").textContent=JSON.stringify({mouth:[+i.uMouth.value.x.toFixed(3),+i.uMouth.value.y.toFixed(3)],mouthR:+i.uMouthR.value.toFixed(3),chinY:+i.uChinY.value.toFixed(3),eyeL:[+i.uEyeL.value.x.toFixed(3),+i.uEyeL.value.y.toFixed(3)],eyeR:[+i.uEyeR.value.x.toFixed(3),+i.uEyeR.value.y.toFixed(3)],eyeR2:+i.uEyeR2.value.toFixed(3)})}window.__avatar={answer:Vs,face:he,schedule:Za};
 /*! Bundled license information:
 
 three/build/three.module.js:
