@@ -1,4 +1,4 @@
-import { createFace } from './face.js';
+import { createHead3D } from './head3d.js';
 import { schedule, createPlayer } from './visemes.js';
 import { createVoice, createEars } from './speech.js';
 import { ask } from './brain.js';
@@ -7,9 +7,9 @@ import { PROFILE, SUGGESTIONS } from './corpus.js';
 var $ = function(s){ return document.querySelector(s); };
 var stage = $('#stage');
 
-var face = createFace(stage, { anchors: window.FACE_ANCHORS || undefined });
+var face = createHead3D(stage);
 if (!face) { $('#nowebgl').hidden = false; }
-else face.setPortrait(window.PORTRAIT_URL || 'assets/portrait-placeholder.jpg');
+else face.setPortrait(window.PORTRAIT_URL || 'assets/portrait.jpg');
 
 var voice  = createVoice();
 var ears   = createEars();
@@ -106,48 +106,9 @@ $('#who').textContent = PROFILE.name;
 $('#role').textContent = PROFILE.title + ' · ' + PROFILE.location;
 setStatus('idle');
 
-/* calibration: drag anchors to fit a real photograph exactly (press C) */
 window.addEventListener('keydown', function(e){
-  if (e.key !== 'c' && e.key !== 'C') return;
-  if (!face) return;
-  var panel = $('#calib');
-  panel.hidden = !panel.hidden;
-  if (!panel.hidden) buildCalib();
+  if ((e.key === 'r' || e.key === 'R') && face) face.reset();
 });
-function buildCalib(){
-  var u = face.uniforms, rows = [
-    ['mouth x','uMouth','x',0,1],['mouth y','uMouth','y',0,1],
-    ['mouth radius','uMouthR',null,0.02,0.3],['chin y','uChinY',null,0,1],
-    ['eye L x','uEyeL','x',0,1],['eye L y','uEyeL','y',0,1],
-    ['eye R x','uEyeR','x',0,1],['eye R y','uEyeR','y',0,1],
-    ['eye radius','uEyeR2',null,0.01,0.2]
-  ];
-  var box = $('#calibBody'); box.innerHTML = '';
-  rows.forEach(function(r){
-    var val = r[2] ? u[r[1]].value[r[2]] : u[r[1]].value;
-    var w = document.createElement('label');
-    w.innerHTML = '<span>' + r[0] + '</span><input type="range" min="'+r[3]+'" max="'+r[4]+
-      '" step="0.002" value="'+val+'"><b>'+(+val).toFixed(3)+'</b>';
-    var input = w.querySelector('input'), out = w.querySelector('b');
-    input.addEventListener('input', function(){
-      var v = +input.value; out.textContent = v.toFixed(3);
-      if (r[2]) u[r[1]].value[r[2]] = v; else u[r[1]].value = v;
-      dumpCalib();
-    });
-    box.appendChild(w);
-  });
-  dumpCalib();
-}
-function dumpCalib(){
-  var u = face.uniforms;
-  $('#calibOut').textContent = JSON.stringify({
-    mouth:[+u.uMouth.value.x.toFixed(3), +u.uMouth.value.y.toFixed(3)],
-    mouthR:+u.uMouthR.value.toFixed(3), chinY:+u.uChinY.value.toFixed(3),
-    eyeL:[+u.uEyeL.value.x.toFixed(3), +u.uEyeL.value.y.toFixed(3)],
-    eyeR:[+u.uEyeR.value.x.toFixed(3), +u.uEyeR.value.y.toFixed(3)],
-    eyeR2:+u.uEyeR2.value.toFixed(3)
-  });
-}
 
 /* expose for scripted verification */
 window.__avatar = { answer:answer, face:face, schedule:schedule };
