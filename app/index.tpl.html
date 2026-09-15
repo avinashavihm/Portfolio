@@ -51,10 +51,9 @@ a{color:var(--accent)}
 @media (max-width:880px){.stack{grid-template-columns:1fr;gap:18px}}
 
 .panel{border:1px solid var(--line2);background:var(--card);overflow:hidden}
-#stage{position:relative;aspect-ratio:1/1;background:linear-gradient(180deg,#FFFFFF,#F5F0E4);width:100%}
+#stage{position:relative;aspect-ratio:896/908;background:#fff;width:100%}
 .card .tag{color:var(--warm)!important}
-#stage canvas{display:block;width:100%;height:100%;cursor:grab}
-#stage canvas:active{cursor:grabbing}
+#stage canvas{display:block;width:100%;height:100%}
 .spin{position:absolute;right:9px;bottom:8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;
   text-transform:uppercase;color:var(--faint);pointer-events:none}
 .badge{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:7px;
@@ -180,8 +179,8 @@ footer{border-top:1px solid var(--line);padding:18px 0 34px;font-family:var(--mo
     <div class="panel">
       <div id="stage">
         <div class="badge"><i id="dot"></i><span id="status">ready</span></div>
-        <div id="nowebgl" hidden>This browser can't run the 3D head.<br>The conversation still works.</div>
-        <div class="spin">drag to rotate · double-click to reset</div>
+        <div id="nowebgl" hidden>This browser can't run the avatar.<br>The conversation still works.</div>
+        
       </div>
       <div class="idblock">
         <h1 id="who">Avinash HM</h1>

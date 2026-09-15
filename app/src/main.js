@@ -1,4 +1,4 @@
-import { createHead3D } from './head3d.js';
+import { createFace } from './face.js';
 import { schedule, createPlayer } from './visemes.js';
 import { createVoice, createEars } from './speech.js';
 import { ask } from './brain.js';
@@ -7,7 +7,7 @@ import { PROFILE, SUGGESTIONS } from './corpus.js';
 var $ = function(s){ return document.querySelector(s); };
 var stage = $('#stage');
 
-var face = createHead3D(stage);
+var face = createFace(stage, { anchors: window.FACE_ANCHORS || undefined });
 if (!face) { $('#nowebgl').hidden = false; }
 else face.setPortrait(window.PORTRAIT_URL || 'assets/portrait.jpg');
 

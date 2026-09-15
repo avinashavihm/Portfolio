@@ -9,19 +9,19 @@ import * as THREE from 'three';
 var POSE = {
   sil:{jaw:0.00,wide:0.00,round:0.00,teeth:0.00},
   PP: {jaw:0.00,wide:0.06,round:0.05,teeth:0.00},
-  FF: {jaw:0.10,wide:0.18,round:0.00,teeth:0.30},
-  TH: {jaw:0.22,wide:0.12,round:0.00,teeth:0.35},
-  DD: {jaw:0.24,wide:0.16,round:0.00,teeth:0.30},
-  kk: {jaw:0.22,wide:0.12,round:0.00,teeth:0.22},
-  CH: {jaw:0.20,wide:0.00,round:0.45,teeth:0.30},
-  SS: {jaw:0.10,wide:0.34,round:0.00,teeth:0.45},
-  nn: {jaw:0.18,wide:0.12,round:0.00,teeth:0.25},
-  RR: {jaw:0.20,wide:0.05,round:0.32,teeth:0.15},
-  aa: {jaw:0.62,wide:0.16,round:0.00,teeth:0.34},
-  E:  {jaw:0.34,wide:0.44,round:0.00,teeth:0.38},
-  I:  {jaw:0.28,wide:0.66,round:0.00,teeth:0.50},
-  O:  {jaw:0.38,wide:0.00,round:0.70,teeth:0.10},
-  U:  {jaw:0.26,wide:0.00,round:0.88,teeth:0.05}
+  FF: {jaw:0.03,wide:0.18,round:0.00,teeth:0.30},
+  TH: {jaw:0.06,wide:0.12,round:0.00,teeth:0.35},
+  DD: {jaw:0.07,wide:0.16,round:0.00,teeth:0.30},
+  kk: {jaw:0.07,wide:0.12,round:0.00,teeth:0.22},
+  CH: {jaw:0.06,wide:0.00,round:0.45,teeth:0.30},
+  SS: {jaw:0.03,wide:0.34,round:0.00,teeth:0.45},
+  nn: {jaw:0.05,wide:0.12,round:0.00,teeth:0.25},
+  RR: {jaw:0.06,wide:0.05,round:0.32,teeth:0.15},
+  aa: {jaw:0.15,wide:0.10,round:0.00,teeth:0.00},
+  E:  {jaw:0.10,wide:0.16,round:0.00,teeth:0.00},
+  I:  {jaw:0.07,wide:0.20,round:0.00,teeth:0.00},
+  O:  {jaw:0.11,wide:0.00,round:0.22,teeth:0.00},
+  U:  {jaw:0.06,wide:0.00,round:0.26,teeth:0.00}
 };
 
 var VERT = `
@@ -44,7 +44,7 @@ var VERT = `
     if (t.y < uMouth.y){
       float down  = clamp((uMouth.y - t.y) / max(uMouth.y - uChinY, 0.001), 0.0, 1.0);
       float side  = 1.0 - smoothstep(0.0, 0.42, abs(t.x - uMouth.x));
-      p.y -= uJaw * 0.098 * down * side;
+      p.y -= uJaw * 0.045 * down * side;
     }
 
     // ---- lips: part around the aperture
@@ -160,6 +160,7 @@ export function createFace(container, cfg){
     (anchors.mouth[1] - 0.5) * planeH,
     0.01
   );
+  mouthMesh.visible = false;   // synthetic interiors read as a sticker; no invented pixels
   head.add(mouthMesh);
 
   var tex = null;
