@@ -12,15 +12,15 @@ var POSE = {
   FF: {jaw:0.10,wide:0.18,round:0.00,teeth:0.30},
   TH: {jaw:0.22,wide:0.12,round:0.00,teeth:0.35},
   DD: {jaw:0.24,wide:0.16,round:0.00,teeth:0.30},
-  kk: {jaw:0.30,wide:0.12,round:0.00,teeth:0.25},
+  kk: {jaw:0.22,wide:0.12,round:0.00,teeth:0.22},
   CH: {jaw:0.20,wide:0.00,round:0.45,teeth:0.30},
   SS: {jaw:0.10,wide:0.34,round:0.00,teeth:0.45},
   nn: {jaw:0.18,wide:0.12,round:0.00,teeth:0.25},
   RR: {jaw:0.20,wide:0.05,round:0.32,teeth:0.15},
-  aa: {jaw:0.92,wide:0.16,round:0.00,teeth:0.40},
-  E:  {jaw:0.48,wide:0.46,round:0.00,teeth:0.45},
+  aa: {jaw:0.62,wide:0.16,round:0.00,teeth:0.34},
+  E:  {jaw:0.34,wide:0.44,round:0.00,teeth:0.38},
   I:  {jaw:0.28,wide:0.66,round:0.00,teeth:0.50},
-  O:  {jaw:0.54,wide:0.00,round:0.72,teeth:0.10},
+  O:  {jaw:0.38,wide:0.00,round:0.70,teeth:0.10},
   U:  {jaw:0.26,wide:0.00,round:0.88,teeth:0.05}
 };
 
@@ -91,8 +91,9 @@ var MOUTH_FRAG = `
     if (h < 0.062){ discard; }
 
     float e = length(vec2(p.x / w, p.y / h));
-    float a = 1.0 - smoothstep(0.58, 1.0, e);
+    float a = 1.0 - smoothstep(0.34, 1.05, e);
     if (a <= 0.004) discard;
+    a = pow(a, 0.78);
 
     vec3 col = uDark;
     // upper teeth sit just under the top lip
@@ -101,7 +102,7 @@ var MOUTH_FRAG = `
     // throat falls away into shadow
     col *= mix(1.0, 0.42, smoothstep(0.15, -0.95, p.y / h));
 
-    gl_FragColor = vec4(col, a * 0.96);
+    gl_FragColor = vec4(col, a * 0.88);
   }
 `;
 
@@ -146,7 +147,7 @@ export function createFace(container, cfg){
 
   var mUni = {
     uJaw:{value:0}, uWide:{value:0}, uRound:{value:0}, uTeeth:{value:0},
-    uDark:{value:new THREE.Color(0x35191b)}, uTeethCol:{value:new THREE.Color(0xe8ded6)}
+    uDark:{value:new THREE.Color(0x7C4E4E)}, uTeethCol:{value:new THREE.Color(0xF0CFC6)}
   };
   var mouthMesh = new THREE.Mesh(
     new THREE.PlaneGeometry(planeW * 0.26, planeH * 0.115),

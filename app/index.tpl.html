@@ -6,21 +6,21 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 :root{
-  --paper:#FBFBF9; --card:#FFFFFF; --sunk:#F2F2EE;
-  --ink:#0F1214; --body:#2E3439; --muted:#5E656B; --faint:#8B9197;
-  --line:#E3E3DD; --line2:#CFCFC8;
-  --accent:#163FA8; --accent-soft:#E8EDF9; --live:#0E6B45; --hot:#A32B1E;
+  --paper:#FDFBF5; --card:#FFFFFF; --sunk:#F5F0E4;
+  --ink:#16191B; --body:#33393D; --muted:#61686D; --faint:#8D9298;
+  --line:#E9E2D2; --line2:#D5CCB8;
+  --accent:#12695B; --accent-soft:#E2EFEB; --warm:#B4560E; --live:#2E7D32; --hot:#A8431C;
   --serif:'Newsreader',Georgia,serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#0E1113; --card:#14181B; --sunk:#1A1F22; --ink:#F0F1EE; --body:#C9CFD4;
-  --muted:#98A0A6; --faint:#727980; --line:#252B30; --line2:#394147;
-  --accent:#7CA0F0; --accent-soft:#16203A; --live:#4FBF8B; --hot:#E5796F;
+  --paper:#121311; --card:#191B18; --sunk:#201F1B; --ink:#F3F1E9; --body:#CBD0CE;
+  --muted:#9AA09E; --faint:#757B79; --line:#2A2C27; --line2:#3D4039;
+  --accent:#5FC0AC; --accent-soft:#132420; --warm:#E0925A; --live:#6FC26F; --hot:#E5876A;
 }}
 :root[data-theme="dark"]{
-  --paper:#0E1113; --card:#14181B; --sunk:#1A1F22; --ink:#F0F1EE; --body:#C9CFD4;
-  --muted:#98A0A6; --faint:#727980; --line:#252B30; --line2:#394147;
-  --accent:#7CA0F0; --accent-soft:#16203A; --live:#4FBF8B; --hot:#E5796F;
+  --paper:#121311; --card:#191B18; --sunk:#201F1B; --ink:#F3F1E9; --body:#CBD0CE;
+  --muted:#9AA09E; --faint:#757B79; --line:#2A2C27; --line2:#3D4039;
+  --accent:#5FC0AC; --accent-soft:#132420; --warm:#E0925A; --live:#6FC26F; --hot:#E5876A;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -52,6 +52,7 @@ a{color:var(--accent)}
 
 .panel{border:1px solid var(--line2);background:var(--card);overflow:hidden}
 #stage{position:relative;aspect-ratio:896/908;background:#fff;width:100%}
+.card .tag{color:var(--warm)!important}
 #stage canvas{display:block;width:100%;height:100%}
 .badge{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:7px;
   background:rgba(255,255,255,.9);border:1px solid var(--line2);padding:5px 9px;
@@ -117,7 +118,7 @@ section{padding-block:34px;border-top:1px solid var(--line)}
 .card p{margin:0;font-size:15px;color:var(--muted);line-height:1.55}
 .kpi{display:flex;gap:16px;flex-wrap:wrap;margin-top:13px;padding-top:11px;border-top:1px solid var(--line)}
 .kpi div{font-family:var(--mono)}
-.kpi .n{font-size:17px;font-weight:600;color:var(--ink)}
+.kpi .n{font-size:17px;font-weight:600;color:var(--warm)}
 .kpi .l{font-size:9.5px;color:var(--faint);letter-spacing:.07em;text-transform:uppercase;margin-top:1px}
 
 .skills dl{margin:0;display:grid;grid-template-columns:minmax(0,172px) minmax(0,1fr)}
