@@ -1,0 +1,343 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AVINASH-1B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#FBFBF9; --card:#FFFFFF; --sunk:#F2F2EE; --rail:#F6F6F3;
+  --ink:#0F1214; --body:#2E3439; --muted:#5E656B; --faint:#8B9197;
+  --line:#E3E3DD; --line2:#CFCFC8;
+  --accent:#163FA8; --accent-soft:#E8EDF9;
+  --pass:#0E6B45; --warn:#8A5D00; --stop:#A32B1E;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1113; --card:#14181B; --sunk:#1A1F22; --rail:#121619;
+    --ink:#F0F1EE; --body:#C9CFD4; --muted:#98A0A6; --faint:#727980;
+    --line:#252B30; --line2:#39414700;
+    --line2:#394147;
+    --accent:#7CA0F0; --accent-soft:#16203A;
+    --pass:#4FBF8B; --warn:#D9A441; --stop:#E5796F;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1113; --card:#14181B; --sunk:#1A1F22; --rail:#121619;
+  --ink:#F0F1EE; --body:#C9CFD4; --muted:#98A0A6; --faint:#727980;
+  --line:#252B30; --line2:#394147;
+  --accent:#7CA0F0; --accent-soft:#16203A;
+  --pass:#4FBF8B; --warn:#D9A441; --stop:#E5796F;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--paper);color:var(--body);font-family:var(--serif);font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;font-optical-sizing:auto}
+a{color:var(--accent)}
+h1,h2,h3{text-wrap:balance;margin:0;color:var(--ink);font-weight:500;letter-spacing:-.012em}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin:0 auto;padding-left:20px;padding-right:20px}
+
+/* ============ card chrome ============ */
+.card-top{border-bottom:1px solid var(--line);background:var(--card)}
+.crumb{font-family:var(--mono);font-size:12px;color:var(--faint);padding-top:22px;letter-spacing:.01em}
+.crumb b{color:var(--ink);font-weight:600}
+.title-row{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:6px 0 14px}
+h1.model{font-family:var(--mono);font-size:clamp(26px,4vw,40px);font-weight:600;letter-spacing:-.03em;line-height:1}
+.gloss{font-size:15px;color:var(--muted);margin-top:7px;max-width:52ch}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font-family:var(--mono);font-size:12.5px;padding:8px 14px;border:1px solid var(--line2);background:var(--card);
+  color:var(--ink);text-decoration:none;cursor:pointer;display:inline-block;transition:.15s}
+.btn:hover{border-color:var(--ink)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.pri:hover{filter:brightness(1.12)}
+.chips{display:flex;gap:5px;flex-wrap:wrap;padding-bottom:16px}
+.chip{font-family:var(--mono);font-size:11px;padding:3px 8px;background:var(--sunk);border:1px solid var(--line);
+  color:var(--muted);letter-spacing:.01em}
+.chip.hl{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+
+/* tabs */
+.tabs{display:flex;gap:0;overflow-x:auto;border-top:1px solid var(--line)}
+.tabs a{font-family:var(--mono);font-size:12.5px;padding:11px 15px;text-decoration:none;color:var(--muted);
+  border-bottom:2px solid transparent;white-space:nowrap}
+.tabs a:hover{color:var(--ink)}
+.tabs a.on{color:var(--ink);border-bottom-color:var(--accent)}
+
+/* ============ layout ============ */
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:42px;padding-top:30px;padding-bottom:70px}
+@media (max-width:940px){.cols{grid-template-columns:1fr;gap:30px}}
+.side{display:flex;flex-direction:column;gap:18px;align-self:start;position:sticky;top:16px}
+@media (max-width:940px){.side{position:static;order:-1}}
+
+.meta{border:1px solid var(--line);background:var(--card)}
+.meta h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);
+  padding:10px 13px;border-bottom:1px solid var(--line);font-weight:500}
+.meta dl{margin:0;font-family:var(--mono);font-size:12px}
+.meta .r{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;padding:7px 13px;border-bottom:1px solid var(--line)}
+.meta .r:last-child{border-bottom:0}
+.meta dt{color:var(--faint)}
+.meta dd{margin:0;color:var(--ink);word-break:break-word}
+.meta dd a{color:var(--accent);text-decoration:none}
+.meta dd a:hover{text-decoration:underline}
+
+/* ============ sections ============ */
+section{margin-bottom:46px;scroll-margin-top:16px}
+.h2{display:flex;align-items:baseline;gap:11px;margin-bottom:15px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+.h2 h2{font-family:var(--mono);font-size:14px;font-weight:600;letter-spacing:-.01em}
+.h2 .hash{font-family:var(--mono);font-size:14px;color:var(--line2)}
+.h2 .aside{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--faint)}
+.prose p{margin:0 0 15px;max-width:68ch;font-size:17.5px;line-height:1.66;color:var(--body)}
+.prose p:last-child{margin-bottom:0}
+.prose strong{color:var(--ink);font-weight:600}
+.lede{font-size:20px!important;line-height:1.55!important;color:var(--ink)!important}
+.pull{border-left:2px solid var(--accent);padding:2px 0 2px 16px;margin:20px 0;max-width:56ch;
+  font-size:19px;line-height:1.5;color:var(--ink)}
+
+/* ============ intended use / attention ============ */
+.intent{border:1px solid var(--line2);background:var(--card)}
+.intent .hd{padding:13px 15px;border-bottom:1px solid var(--line);background:var(--sunk)}
+.intent .hd .q{font-family:var(--mono);font-size:12.5px;color:var(--ink);font-weight:500}
+.intent .hd .s{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:3px}
+.intent .picker{display:flex;flex-wrap:wrap;gap:5px;padding:13px 15px;border-bottom:1px solid var(--line)}
+.intent .picker button{font-family:var(--mono);font-size:11.5px;padding:6px 11px;border:1px solid var(--line2);
+  background:var(--paper);color:var(--muted);cursor:pointer;transition:.13s}
+.intent .picker button:hover{border-color:var(--ink);color:var(--ink)}
+.intent .picker button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.attn{padding:13px 15px;display:flex;flex-direction:column;gap:5px}
+.arow{display:grid;grid-template-columns:minmax(0,186px) minmax(0,1fr) 46px;gap:11px;align-items:center;
+  font-family:var(--mono);font-size:11.5px;transition:opacity .3s}
+.arow .n{color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.arow .t{height:9px;background:var(--sunk);position:relative;overflow:hidden}
+.arow .t i{display:block;height:100%;background:var(--accent);width:0;transition:width .45s cubic-bezier(.4,0,.2,1)}
+.arow .s{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+.arow.dim{opacity:.34}
+.intent .ft{padding:10px 15px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--faint)}
+
+/* ============ training run ============ */
+.run{border:1px solid var(--line2);background:var(--card)}
+.run .hd{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:11px 15px;border-bottom:1px solid var(--line);background:var(--sunk);font-family:var(--mono);font-size:11.5px}
+.run .hd .st{color:var(--pass)}
+.run .hd .st::before{content:"●";margin-right:6px}
+.landscape{height:400px;position:relative;background:var(--card);cursor:grab;touch-action:pan-y}
+.landscape:active{cursor:grabbing}
+.landscape canvas{display:block;width:100%;height:100%}
+.landscape .hint{position:absolute;right:11px;bottom:9px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--faint);pointer-events:none}
+.landscape .axis{position:absolute;left:11px;top:10px;font-family:var(--mono);font-size:10px;color:var(--faint);
+  line-height:1.7;pointer-events:none}
+@media (max-width:620px){.landscape{height:290px}}
+.ckpts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.ck{background:var(--card);padding:11px 13px;cursor:pointer;transition:background .15s;border:0;text-align:left;font:inherit}
+.ck:hover,.ck.on{background:var(--accent-soft)}
+.ck .s{font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.06em}
+.ck .t{font-family:var(--mono);font-size:12.5px;color:var(--ink);margin-top:3px;font-weight:500}
+.ck .d{font-size:13px;color:var(--muted);margin-top:2px;line-height:1.4}
+
+/* ============ tables ============ */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12.5px;min-width:520px}
+thead th{text-align:left;font-weight:500;color:var(--faint);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+  padding:9px 13px;border-bottom:1px solid var(--line2);background:var(--sunk);white-space:nowrap}
+tbody td{padding:10px 13px;border-bottom:1px solid var(--line);color:var(--body);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr.hl{background:var(--accent-soft)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:500;white-space:nowrap}
+td.good{color:var(--pass)}
+.src{font-size:11px;color:var(--faint);font-family:var(--mono);margin-top:7px}
+
+/* ============ lists ============ */
+.lim{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.lim .c{background:var(--card);padding:15px}
+.lim .c h3{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px;font-weight:500}
+.lim .c.in h3{color:var(--pass)}
+.lim .c.out h3{color:var(--stop)}
+.lim ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.lim li{font-size:15px;line-height:1.5;padding-left:16px;position:relative;color:var(--body)}
+.lim li::before{content:"";position:absolute;left:0;top:10px;width:7px;height:1px;background:var(--line2)}
+
+pre.bib{margin:0;font-family:var(--mono);font-size:11.5px;line-height:1.65;background:var(--sunk);border:1px solid var(--line);
+  padding:14px;overflow-x:auto;color:var(--body)}
+.deploy{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.deploy a{background:var(--card);padding:14px;text-decoration:none;display:block;transition:background .15s}
+.deploy a:hover{background:var(--accent-soft)}
+.deploy .k{font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint)}
+.deploy .v{font-family:var(--mono);font-size:13.5px;color:var(--ink);margin-top:4px;word-break:break-all}
+
+footer{border-top:1px solid var(--line);padding:18px 0 34px;font-family:var(--mono);font-size:11.5px;color:var(--faint);
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+
+<div class="card-top">
+  <div class="wrap">
+    <div class="crumb">avinash-hm&nbsp;/&nbsp;<b>AVINASH-1B</b></div>
+    <div class="title-row">
+      <div>
+        <h1 class="model">AVINASH-1B</h1>
+        <div class="gloss">AI Engineer. One year in production, Bangalore. Optimised for shipping large language models on hardware you can actually afford.</div>
+      </div>
+      <div class="actions">
+        <a class="btn pri" href="mailto:avi.hm24@gmail.com">Deploy</a>
+        <a class="btn" href="#evaluation">Evaluations</a>
+        <a class="btn" href="https://github.com/Avinashhmavi" target="_blank" rel="noopener">Repository</a>
+      </div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <nav class="tabs" id="tabs">
+      <a href="#description" class="on">Model description</a>
+      <a href="#intended-use">Intended use</a>
+      <a href="#training">Training</a>
+      <a href="#evaluation">Evaluation</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#limitations">Limitations</a>
+      <a href="#inference">Inference</a>
+      <a href="#citation">Citation</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap cols">
+  <main>
+    <section id="description">
+      <div class="h2"><span class="hash">#</span><h2>Model description</h2></div>
+      <div class="prose">
+        <p class="lede">Avinash HM builds large language model systems that survive contact with a budget.</p>
+        <p>He came to machine learning through <strong>electronics</strong>. Four years of Electronics and Communication Engineering at Sapthagiri College in Bangalore, finishing in 2023, is an education in constraint — in what fits on a board, what a power envelope permits, what you do when the hardware refuses to grow. That turns out to be the correct training data for the era of models too large to deploy.</p>
+        <p>An <strong>MBA in Data Analytics and Marketing</strong> at IFIM College followed, through 2025, adding the second half of the problem: not just whether a system works, but whether it is worth running. Most engineers pick one of these. The combination is the reason his work tends to be measured in percentages rather than adjectives.</p>
+        <p>The thesis arrived at <strong>Reliance Jio</strong> in early 2025. Fine-tuning transformer models for edge deployment, he cut inference latency by about 35% and cloud dependency by about 40%, then applied GPTQ and AWQ quantization for roughly 45% memory reduction while holding more than 95% of baseline accuracy. The finding generalised: the model does not have to be smaller, it has to be cheaper to be right. That work became a benchmark study across Qwen-3, LLaMA-3.2 and GPT-2, and then an <strong>IEEE conference paper</strong> at ICIICS-2026 on post-training quantization.</p>
+        <p>Since July 2025 he has been at <strong>AiGenthix Technologies</strong>, where the work moved from single models to systems that co-ordinate: five-plus production LLM deployments, RAG architectures that lifted retrieval relevance around 30% over keyword baselines, and multi-agent workflows built on A2A interaction patterns and the Model Context Protocol, cutting manual effort by about 40%. Along the way, a multi-agent education platform called Sahayak AI took <strong>second place nationally</strong> at Google Cloud and Hack2Skill's Agentic AI Day 2025.</p>
+        <div class="pull">The through-line is compression in every sense: of models, of cost, of the distance between a research result and something a company can run on Monday.</div>
+      </div>
+    </section>
+
+    <section id="intended-use">
+      <div class="h2"><span class="hash">#</span><h2>Intended use</h2><span class="aside">interactive</span></div>
+      <div class="intent">
+        <div class="hd">
+          <div class="q">What are you hiring for?</div>
+          <div class="s">Attention is recomputed over the full record; this card reorders itself.</div>
+        </div>
+        <div class="picker" id="picker"></div>
+        <div class="attn" id="attn"></div>
+        <div class="ft" id="attnFt">—</div>
+      </div>
+    </section>
+
+    <section id="training">
+      <div class="h2"><span class="hash">#</span><h2>Training</h2><span class="aside">2019 — present</span></div>
+      <div class="run">
+        <div class="hd">
+          <span>run: <b id="runName">avinash-hm/career</b></span>
+          <span class="st">RUNNING</span>
+        </div>
+        <div class="landscape" id="landscape">
+          <div class="axis" id="axisLbl">loss ↓ &nbsp;cost per deployed token<br>x · model scale &nbsp;· &nbsp;z · systems complexity</div>
+          <div class="hint">drag to orbit</div>
+        </div>
+        <div class="ckpts" id="ckpts"></div>
+      </div>
+      <p class="src">The surface is illustrative; the checkpoints and their reported figures are not. Each marks a real position in the record below.</p>
+    </section>
+
+    <section id="evaluation">
+      <div class="h2"><span class="hash">#</span><h2>Evaluation</h2><span class="aside">reported figures</span></div>
+      <div class="tbl-wrap">
+        <table id="evalTbl">
+          <thead><tr><th>Benchmark</th><th>Setting</th><th style="text-align:right">Result</th><th>Where</th></tr></thead>
+          <tbody id="evalBody"></tbody>
+        </table>
+      </div>
+      <p class="src">Figures as reported by the deployments and the published study. Percentages are against the stated baseline in each case, not against each other.</p>
+    </section>
+
+    <section id="capabilities">
+      <div class="h2"><span class="hash">#</span><h2>Capabilities</h2><span class="aside">ordered by current intent</span></div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Domain</th><th>Detail</th></tr></thead>
+          <tbody id="capBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="limitations">
+      <div class="h2"><span class="hash">#</span><h2>Limitations and out-of-scope use</h2></div>
+      <div class="lim">
+        <div class="c in">
+          <h3>In scope</h3>
+          <ul>
+            <li>Production LLM systems: RAG pipelines, agentic workflows, tool use and orchestration.</li>
+            <li>Inference economics — quantization, latency and memory work on constrained or edge hardware.</li>
+            <li>Evaluation and benchmarking of model versions before release.</li>
+            <li>Containerised deployment on Docker and Kubernetes with CI/CD.</li>
+          </ul>
+        </div>
+        <div class="c out">
+          <h3>Out of scope</h3>
+          <ul>
+            <li>One year of production experience. Not a decade-deep distributed systems architect, and does not claim to be.</li>
+            <li>Pre-training foundation models from scratch; the work is post-training, serving and systems.</li>
+            <li>Not a substitute for a team. Strongest where an organisation already has a problem worth measuring.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="inference">
+      <div class="h2"><span class="hash">#</span><h2>Inference</h2><span class="aside">Bangalore, India</span></div>
+      <div class="deploy">
+        <a href="mailto:avi.hm24@gmail.com"><div class="k">Email · fastest</div><div class="v">avi.hm24@gmail.com</div></a>
+        <a href="tel:+918951228018"><div class="k">Phone</div><div class="v">+91 8951228018</div></a>
+        <a href="https://linkedin.com/in/avinash-hm007" target="_blank" rel="noopener"><div class="k">LinkedIn</div><div class="v">avinash-hm007</div></a>
+        <a href="https://github.com/Avinashhmavi" target="_blank" rel="noopener"><div class="k">GitHub</div><div class="v">Avinashhmavi</div></a>
+      </div>
+    </section>
+
+    <section id="citation">
+      <div class="h2"><span class="hash">#</span><h2>Citation</h2></div>
+      <pre class="bib">@inproceedings{hm2026quantization,
+  title     = {Practical Implementation and Assessment of Post-Training
+               Quantization Methods for Large Language Models},
+  author    = {HM, Avinash},
+  booktitle = {3rd International Conference on Integrated Intelligence
+               and Communication Systems (ICIICS)},
+  year      = {2026},
+  publisher = {IEEE}
+}</pre>
+    </section>
+  </main>
+
+  <aside class="side">
+    <div class="meta">
+      <h3>Model card</h3>
+      <dl>
+        <div class="r"><dt>type</dt><dd>Human · AI Engineer</dd></div>
+        <div class="r"><dt>location</dt><dd>Bangalore, India</dd></div>
+        <div class="r"><dt>status</dt><dd style="color:var(--pass)">available</dd></div>
+        <div class="r"><dt>base</dt><dd>B.E. Electronics &amp; Communication, 2019–2023</dd></div>
+        <div class="r"><dt>finetuned</dt><dd>MBA Data Analytics &amp; Marketing, 2023–2025</dd></div>
+        <div class="r"><dt>deployed</dt><dd>AiGenthix Technologies, Jul 2025 –</dd></div>
+        <div class="r"><dt>paper</dt><dd>IEEE ICIICS-2026</dd></div>
+        <div class="r"><dt>certified</dt><dd>Claude Certified Architect — Foundations, Anthropic</dd></div>
+        <div class="r"><dt>site</dt><dd><a href="https://avihm.site" target="_blank" rel="noopener">avihm.site</a></dd></div>
+      </dl>
+    </div>
+    <div class="meta">
+      <h3>Also trained on</h3>
+      <dl>
+        <div class="r"><dt>certs</dt><dd>Generative AI Mastery — OpenAI Academy · Data Analytics — IIT Roorkee · Six Sigma White Belt</dd></div>
+        <div class="r"><dt>offline</dt><dd>Car racing, PC games</dd></div>
+      </dl>
+    </div>
+  </aside>
+</div>
+
+<div class="wrap"><footer>
+  <span>AVINASH-1B · model card</span>
+  <span>Every figure on this page comes from the record. Nothing is generated.</span>
+</footer></div>
+<!--APP-->
