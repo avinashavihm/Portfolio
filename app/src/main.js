@@ -1,4 +1,4 @@
-import { createFace } from './face.js';
+import { createFaceMesh } from './facemesh.js';
 import { schedule, createPlayer } from './visemes.js';
 import { createVoice, createEars } from './speech.js';
 import { ask } from './brain.js';
@@ -7,9 +7,10 @@ import { PROFILE, SUGGESTIONS } from './corpus.js';
 var $ = function(s){ return document.querySelector(s); };
 var stage = $('#stage');
 
-var face = createFace(stage, { anchors: window.FACE_ANCHORS || undefined });
-if (!face) { $('#nowebgl').hidden = false; }
-else face.setPortrait(window.PORTRAIT_URL || 'assets/portrait.jpg');
+var face = null;
+createFaceMesh(stage, { portrait: window.PORTRAIT_URL || 'assets/portrait.jpg' })
+  .then(function(f){ face = f; if (!f) $('#nowebgl').hidden = false; })
+  .catch(function(){ $('#nowebgl').hidden = false; });
 
 var voice  = createVoice();
 var ears   = createEars();
@@ -111,4 +112,4 @@ window.addEventListener('keydown', function(e){
 });
 
 /* expose for scripted verification */
-window.__avatar = { answer:answer, face:face, schedule:schedule };
+window.__avatar = { answer:answer, schedule:schedule, get face(){ return face; } };
